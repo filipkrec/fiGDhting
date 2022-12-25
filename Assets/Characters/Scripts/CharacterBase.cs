@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
+[Serializable]
 public enum Moveset
 {
     i,
@@ -10,9 +14,9 @@ public enum Moveset
     j,
     k1,
     k2,
-    block,
-    left,
-    right
+    b,
+    l,
+    r
 }
 
 public class CharacterBase : MonoBehaviour
@@ -24,9 +28,9 @@ public class CharacterBase : MonoBehaviour
         { Moveset.k1, KeyCode.Keypad6 },
         { Moveset.k2, KeyCode.Keypad2 },
         { Moveset.j, KeyCode.UpArrow },
-        { Moveset.block, KeyCode.DownArrow },
-        { Moveset.left, KeyCode.LeftArrow },
-        { Moveset.right, KeyCode.RightArrow },
+        { Moveset.b, KeyCode.DownArrow },
+        { Moveset.l, KeyCode.LeftArrow },
+        { Moveset.r, KeyCode.RightArrow },
     };
 
     private static Dictionary<Moveset, string> moveTriggers = new()
@@ -34,7 +38,7 @@ public class CharacterBase : MonoBehaviour
         { Moveset.p1, "p1" },
         { Moveset.p2, "p2" },
         { Moveset.j, "j" },
-        { Moveset.k1, "k1"},
+        { Moveset.k1, "k1" },
         { Moveset.k2, "k2" },
     };
 
@@ -46,60 +50,84 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private int m_health = 10;
 
+    Vector2 moveValue;
+
     private bool jumping;
     private float baseHeight;
     private bool blocking;
     private float health;
     private bool stunned;
 
+    public void J() { DoAction(Moveset.j); }
+    public void P1() { DoAction(Moveset.p1); }
+    public void P2() { DoAction(Moveset.p2); }
+    public void K1() { DoAction(Moveset.k1); }
+    public void K2() { DoAction(Moveset.k2); }
+
+    public void OnWSAD(CallbackContext _context)
+    {
+        moveValue = _context.ReadValue<Vector2>();
+
+        Debug.Log(moveValue);
+
+        if (moveValue.y < 0 && !blocking)
+        {
+            Block(true);
+        }
+        else if ((moveValue.y >= 0 || moveValue.x != 0) && blocking)
+        {
+            Block(false);
+        }
+
+        if (moveValue.y > 0 && !jumping)
+        {
+            StartCoroutine(Jump());
+        }
+    }
+
+    public void L(CallbackContext _context)
+    {
+        if (stunned || blocking) return;
+
+        if (_context.phase == InputActionPhase.Waiting || _context.phase == InputActionPhase.Started)
+        {
+            Move(false);
+        }
+    }
+
+    public void R(CallbackContext _context)
+    {
+        if (stunned || blocking) return;
+
+        if (_context.phase == InputActionPhase.Waiting || _context.phase == InputActionPhase.Started)
+        {
+            Move(true);
+        }
+    }
+
     private void Awake()
     {
         baseHeight = transform.position.y;
         spriteRenderer.material = new Material(spriteRenderer.material);
+        GetComponent<PlayerInput>().actions.actionMaps[0].Enable();
+    }
+
+    private void DoAction(Moveset _action)
+    {
+        if (stunned || blocking || jumping) return;
+
+        m_animator.SetTrigger(moveTriggers[_action]);
     }
 
     private void Update()
     {
-        if (stunned) return;
-
-        if (Input.GetKeyDown(moveKeys[Moveset.block]))
+        if (moveValue.x > 0)
         {
-            Block(true);
+            Move(true);
         }
-        else if (Input.GetKeyUp(moveKeys[Moveset.block]))
+        else if (moveValue.x < 0)
         {
-            Block(false);
-        }
-        else if (!blocking)
-        {
-            if (Input.GetKeyDown(moveKeys[Moveset.p1]))
-            {
-                m_animator.SetTrigger(moveTriggers[Moveset.p1]);
-            }
-            else if (Input.GetKeyDown(moveKeys[Moveset.p2]))
-            {
-                m_animator.SetTrigger(moveTriggers[Moveset.p2]);
-            }
-            else if (Input.GetKeyDown(moveKeys[Moveset.k1]))
-            {
-                m_animator.SetTrigger(moveTriggers[Moveset.k1]);
-            }
-            else if (Input.GetKeyDown(moveKeys[Moveset.k2]))
-            {
-                m_animator.SetTrigger(moveTriggers[Moveset.k2]);
-            }
-            else if (Input.GetKeyDown(moveKeys[Moveset.j]))
-            {
-                StartCoroutine(Jump());
-            }
-            else if (Input.GetKey(moveKeys[Moveset.left]))
-            {
-                Move(false);
-            }
-            else if (Input.GetKey(moveKeys[Moveset.right]))
-            {
-                Move(true);
-            }
+            Move(false);
         }
 
         if (Input.GetKey(KeyCode.T))
@@ -150,8 +178,8 @@ public class CharacterBase : MonoBehaviour
     private void InteruptAction()
     {
         m_animator.Play("i");
-        
-        foreach(var trigger in moveTriggers)
+
+        foreach (var trigger in moveTriggers)
         {
             m_animator.ResetTrigger(trigger.Value);
         }
