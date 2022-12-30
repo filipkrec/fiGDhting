@@ -1,7 +1,9 @@
+using UnityEngine.InputSystem;
+
 public struct PlayerSetup
 {
     public CharacterBase Character;
-    public string SelectedControlScheme;
+    public InputDevice Device;
 }
 
 public static class FightSetup

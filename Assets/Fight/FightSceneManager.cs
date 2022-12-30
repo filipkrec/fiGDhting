@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FightSceneManager : MonoBehaviour
 {
@@ -14,17 +15,8 @@ public class FightSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        FightSetup.PlayerOne = new PlayerSetup
-        {
-            Character = scriptable.Characters[0],
-            SelectedControlScheme = "keyboard",
-        };
-
-        FightSetup.PlayerTwo = new PlayerSetup
-        {
-            Character = scriptable.Characters[0],
-            SelectedControlScheme = "keyboard",
-        };
+        FightSetup.PlayerOne.Character = scriptable.Characters[0];
+        FightSetup.PlayerTwo.Character = scriptable.Characters[0];
 
         PlayerOne = Instantiate(FightSetup.PlayerOne.Character);
         PlayerTwo = Instantiate(FightSetup.PlayerTwo.Character);
@@ -37,6 +29,12 @@ public class FightSceneManager : MonoBehaviour
 
         PlayerOne.Setup(m_leftHPBar, this);
         PlayerTwo.Setup(m_rightHPBar, this);
+
+        PlayerInput playerInput = PlayerOne.GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentControlScheme(FightSetup.PlayerOne.Device);
+
+        playerInput = PlayerTwo.GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentControlScheme(FightSetup.PlayerTwo.Device);
     }
 
     public void CheckRotations()

@@ -316,7 +316,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a40e7b0f-bb3c-4499-b376-2dc8264ac192
     m_ActionName: Base/WSAD[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Base
   m_SplitScreenIndex: -1
