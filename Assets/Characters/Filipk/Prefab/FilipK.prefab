@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_name: FilipK
-  m_icon: {fileID: 0}
+  m_icon: {fileID: 21300000, guid: 602805fe3b79c9543ba7242f4e664e86, type: 3}
   spriteRenderer: {fileID: 2145151685620328460}
   m_animator: {fileID: 2145151685620328462}
   m_hitbox: {fileID: 7097286021919449176}

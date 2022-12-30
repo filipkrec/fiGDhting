@@ -94,6 +94,8 @@ public class CharacterBase : MonoBehaviour
     private Moveset m_currentMove;
 
     public bool FacingRight => m_facingRight;
+    public string Name => m_name;
+    public Sprite Icon => m_icon;
 
     public void J() { if(m_currentMove != Moveset.j) DoAction(Moveset.j); }
     public void P1() { if (m_currentMove != Moveset.p1) DoAction(Moveset.p1); }

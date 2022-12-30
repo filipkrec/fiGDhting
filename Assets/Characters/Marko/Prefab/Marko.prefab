@@ -72,6 +72,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 5143f8b09e1a22c46a77f128f60cfb62, type: 2}
     - target: {fileID: 2145151685620328463, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 7ecc183cd69248348ab2e419cf67beb4, type: 3}
+    - target: {fileID: 2145151685620328463, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_name
       value: Marko
       objectReference: {fileID: 0}
