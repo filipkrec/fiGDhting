@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 2145151685620328462}
   - component: {fileID: 2145151685620328463}
   - component: {fileID: 978252072}
+  - component: {fileID: 5788055168504625099}
   m_Layer: 0
   m_Name: FilipK
   m_TagString: Untagged
@@ -203,14 +204,13 @@ MonoBehaviour:
   m_maxHealth: 100
   m_moveDamageValues:
   - Move: 1
-    Damage: 0
+    Damage: 5
   - Move: 2
-    Damage: 0
+    Damage: 15
   - Move: 4
-    Damage: 0
+    Damage: 10
   - Move: 5
-    Damage: 0
-  m_currentMove: 0
+    Damage: 20
 --- !u!114 &978252072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +321,27 @@ MonoBehaviour:
   m_DefaultActionMap: Base
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!50 &5788055168504625099
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145151685620328459}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8543572209385987354
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +353,6 @@ GameObject:
   - component: {fileID: 4081563403405316535}
   - component: {fileID: 2610041611926242196}
   - component: {fileID: 7416770900588333071}
-  - component: {fileID: 4455589398928081484}
   m_Layer: 0
   m_Name: HurtBox
   m_TagString: Hurtbox
@@ -393,24 +413,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c814b4ba8ac1243944e1d8b5dd414b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &4455589398928081484
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543572209385987354}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

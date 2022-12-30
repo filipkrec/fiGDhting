@@ -80,13 +80,20 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private int m_maxHealth = 10;
     [SerializeField] List<MoveDamage> m_moveDamageValues;
 
+    private FightSceneManager m_manager;
+    private HealthBar m_healthBar;
+
     private Vector2 m_moveValue;
 
     private float m_baseHeight;
-    private float m_health;
+    private int m_health;
     private bool m_stunned;
+    private bool m_lastChance;
+    private bool m_facingRight;
 
-    [SerializeField] private Moveset m_currentMove;
+    private Moveset m_currentMove;
+
+    public bool FacingRight => m_facingRight;
 
     public void J() { if(m_currentMove != Moveset.j) DoAction(Moveset.j); }
     public void P1() { if (m_currentMove != Moveset.p1) DoAction(Moveset.p1); }
@@ -94,8 +101,10 @@ public class CharacterBase : MonoBehaviour
     public void K1() { if (m_currentMove != Moveset.k1) DoAction(Moveset.k1); }
     public void K2() { if (m_currentMove != Moveset.k2) DoAction(Moveset.k2); }
 
-    private void Awake()
+    public void Setup(HealthBar _hpBar, FightSceneManager _manager)
     {
+        m_manager = _manager;
+
         m_baseHeight = transform.position.y;
         m_currentMove = Moveset.i;
 
@@ -105,6 +114,14 @@ public class CharacterBase : MonoBehaviour
         m_hitbox.OnCollision = OnHit;
 
         m_health = m_maxHealth;
+
+        m_healthBar = _hpBar;
+    }
+
+    public void FaceRight(bool _true)
+    {
+        transform.rotation = _true ? Quaternion.Euler(new Vector3(0, 180, 0)) : Quaternion.Euler(Vector3.zero);
+        m_facingRight = _true;
     }
 
     private void Update()
@@ -171,6 +188,8 @@ public class CharacterBase : MonoBehaviour
         if (m_currentMove != Moveset.i && m_currentMove != Moveset.j) return;
 
         transform.position += (_directionRight ? 1 : -1) * new Vector3(m_moveSpeed * Time.deltaTime, 0f, 0f);
+
+        m_manager.CheckRotations();
     }
 
     private void Block(bool _isBlocking)
@@ -199,6 +218,23 @@ public class CharacterBase : MonoBehaviour
         m_health -= _damage;
         InteruptAction();
         StartCoroutine(TakeDmgCoroutine());
+
+        if (m_lastChance)
+        {
+            Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            rigidbody.AddForce(Vector2.one * (m_facingRight ? -1 : 1) * (float)_damage / 100);
+            rigidbody.AddTorque(920);
+            return;
+        }
+
+        m_healthBar.SetHP((float)m_health / m_maxHealth);
+
+        if(m_health < 0)
+        {
+            m_healthBar.SetSpecial();
+            m_lastChance = true;
+        }
     }
 
     private void InteruptAction()
