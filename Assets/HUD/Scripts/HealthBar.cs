@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image m_frontBar;
     [SerializeField] private Image m_backBar;
     [SerializeField] private Image m_specialImage;
+    [SerializeField] private TextMeshProUGUI m_name;
 
     private float m_timeToCatchUp;
 
     private float test = 1f;
+
+    public void SetName(CharacterBase _char)
+    {
+        m_name.text = _char.Name;
+    }
 
     private void Update()
     {

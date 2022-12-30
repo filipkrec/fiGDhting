@@ -118,6 +118,7 @@ public class CharacterBase : MonoBehaviour
         m_health = m_maxHealth;
 
         m_healthBar = _hpBar;
+        m_healthBar.SetName(this);
     }
 
     public void FaceRight(bool _true)
@@ -225,7 +226,11 @@ public class CharacterBase : MonoBehaviour
         {
             Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
-            rigidbody.AddForce(Vector2.one * (m_facingRight ? -1 : 1) * (float)_damage / 100);
+
+            Vector2 force = Vector2.one * ((float)_damage) / 100f;
+            force.x *= m_facingRight ? -1 : 1;
+            rigidbody.AddForce(force);
+
             rigidbody.AddTorque(920);
             return;
         }

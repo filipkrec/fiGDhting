@@ -199,7 +199,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -461,6 +461,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.2000122
       objectReference: {fileID: 0}
+    - target: {fileID: 5931785102817728405, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931785102817728405, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931785102817728405, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931785102817728405, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931785102817728405, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
+      objectReference: {fileID: 0}
     - target: {fileID: 8087612469337260818, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -548,6 +568,14 @@ PrefabInstance:
     - target: {fileID: 8087612469337260819, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
       propertyPath: m_Name
       value: HPBar2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928094836028869925, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_geometrySortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8928094836028869925, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_IsTextObjectScaleStatic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
@@ -652,6 +680,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 410219834}
     m_Modifications:
+    - target: {fileID: 5931785102817728405, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8087612469337260818, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
