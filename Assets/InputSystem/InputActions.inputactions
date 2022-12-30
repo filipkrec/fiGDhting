@@ -7,16 +7,16 @@
             "actions": [
                 {
                     "name": "P1",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "bd53c532-8953-4309-b985-ed6c8f4f4e99",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
                     "name": "P2",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "085df3c1-7b55-4038-b623-de603f376e3f",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "K1",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "f48722b1-f7f4-4676-a9cb-e86e9c51acf8",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -34,7 +34,7 @@
                 },
                 {
                     "name": "K2",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "9993eb12-755c-4b73-a865-925f7ba341e7",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -43,9 +43,9 @@
                 },
                 {
                     "name": "WSAD",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "a40e7b0f-bb3c-4499-b376-2dc8264ac192",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -65,11 +65,33 @@
                 },
                 {
                     "name": "",
+                    "id": "92b564d4-aef6-464d-bafd-471c40e88593",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "P1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b9a59834-585d-4087-a276-39d442c70599",
                     "path": "<Keyboard>/numpad8",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "P2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "491c08b7-716e-41aa-9937-6211a57e0034",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
                     "action": "P2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -87,11 +109,33 @@
                 },
                 {
                     "name": "",
+                    "id": "de082ed0-54fd-4134-a888-b7687d800d4a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "K1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f8aa8b16-e153-498a-9774-2306f0ec772b",
                     "path": "<Keyboard>/numpad6",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
+                    "action": "K2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db00af2e-4ad8-4010-8e52-d5f2659210fb",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
                     "action": "K2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -150,6 +194,61 @@
                     "action": "WSAD",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "e1428acf-61ae-45bf-8346-29140c02a608",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WSAD",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "da58e16e-10d6-43fb-aa26-776a7cbe3e49",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "WSAD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "8cf8180f-701a-4757-b0fc-91d0f560dd8d",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "WSAD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "ae9b8365-27f6-4faf-ab78-e70f820d0118",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "WSAD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "8fe88ec8-b638-41d8-aaa7-35053cf6855d",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "WSAD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
@@ -161,6 +260,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Joystick",
+            "bindingGroup": "Joystick",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

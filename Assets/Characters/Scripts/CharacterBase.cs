@@ -29,7 +29,7 @@ public struct MoveDamage
 
 public class CharacterBase : MonoBehaviour
 {
-    private const float STUN_TIME = 0.7f;
+    private const float STUN_TIME = 1f;
     private const float STUN_MULTIPLYER = 1.5f;
 
     private static Dictionary<Moveset, KeyCode> moveKeys = new()
@@ -137,16 +137,6 @@ public class CharacterBase : MonoBehaviour
         {
             Move(false);
         }
-
-        if (Input.GetKey(KeyCode.T))
-        {
-            TakeDamage(1);
-        }
-
-        if (Input.GetKey(KeyCode.R))
-        {
-            Stun(0.5f);
-        }
     }
 
     public void OnIdle()
@@ -158,9 +148,9 @@ public class CharacterBase : MonoBehaviour
 
     public void OnWSAD(CallbackContext _context)
     {
-        m_moveValue = _context.ReadValue<Vector2>();
+        if (m_stunned) return;
 
-        Debug.Log(m_moveValue);
+        m_moveValue = _context.ReadValue<Vector2>();
 
         if (m_moveValue.y < 0 && m_currentMove != Moveset.b && !hardHits.Contains(m_currentMove))
         {
@@ -285,11 +275,14 @@ public class CharacterBase : MonoBehaviour
             currentDamage = m_moveDamageValues.First((x) => x.Move == m_currentMove).Damage;
         }
 
-        enemy.TakeDamage(currentDamage);
 
         if (enemy.m_currentMove == Moveset.b && fastHits.Contains(m_currentMove))
         {
             Stun(STUN_TIME);
+        }
+        else
+        {
+            enemy.TakeDamage(currentDamage);
         }
     }
 
