@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Glava
+  m_Controller: {fileID: 9100000, guid: a32360e83ba141e4986a105e50398bb2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7bdd2cd07af5bb144a950ba04ab1e270, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 18c59ac4746681440bf0403674dd53b9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4e9957a46e43bd14b909aa32e7184f57, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7b7ba7dba75923940b1aabe21ad938d0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b3e5cdfbd519df649820a539ebe204a8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 251db3a44e2facf4fa32fcf054bc26b3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 422a693267ae92148bda6366b910ca57, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 185d23977a9c14e408ea3ed254fcfb63, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3307089e0289e8849b54985d3725a5d1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 125931a7d79868a4cb0ea38efec37886, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: dd4069b817b5511449900528dc5654a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e1284d72c40c1464a847c13457c8cd71, type: 2}
