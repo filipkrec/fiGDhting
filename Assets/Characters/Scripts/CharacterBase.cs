@@ -72,6 +72,7 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private Animator m_animator;
     [SerializeField] private ColliderEvent m_hitbox;
     [SerializeField] private ColliderEvent m_hurtbox;
+    [SerializeField] private Rigidbody2D m_rigidbody;
 
     [Header("Stats")]
 
@@ -214,14 +215,13 @@ public class CharacterBase : MonoBehaviour
 
         if (m_lastChance)
         {
-            Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-            rigidbody.bodyType = RigidbodyType2D.Dynamic;
+            m_rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
             Vector2 force = Vector2.one * ((float)_damage) / 100f;
             force.x *= m_facingRight ? -1 : 1;
-            rigidbody.AddForce(force);
+            m_rigidbody.AddForce(force);
 
-            rigidbody.AddTorque(920);
+            m_rigidbody.AddTorque(920);
             return;
         }
 
@@ -264,7 +264,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (!_enemyCollider.CompareTag(ColliderEvent.HURTBOX_TAG)) return;
 
-        CharacterBase enemy = _enemyCollider.transform.parent.GetComponent<CharacterBase>();
+        CharacterBase enemy = _enemyCollider.transform.parent.parent.GetComponent<CharacterBase>();
 
         if (hardHits.Contains(m_currentMove) && enemy.m_currentMove == Moveset.j) return;
 

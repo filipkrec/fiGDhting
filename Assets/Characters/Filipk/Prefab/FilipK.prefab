@@ -52,6 +52,7 @@ MonoBehaviour:
   m_animator: {fileID: 1127136147194153020}
   m_hitbox: {fileID: 3371525295180926202}
   m_hurtbox: {fileID: 3027457645035623947}
+  m_rigidbody: {fileID: 7648880477497499642}
   m_moveSpeed: 10
   m_jumpHeight: 2
   m_maxHealth: 100
