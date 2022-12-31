@@ -7,6 +7,7 @@ public class CharactersScriptable : ScriptableObject
 {
     public Color PlayerOneColor;
     public Color PlayerTwoColor;
+    public Color MixedColor;
 
     public List<CharacterBase> Characters;
 }

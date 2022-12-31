@@ -275,7 +275,6 @@ public class CharacterBase : MonoBehaviour
             currentDamage = m_moveDamageValues.First((x) => x.Move == m_currentMove).Damage;
         }
 
-
         if (enemy.m_currentMove == Moveset.b && fastHits.Contains(m_currentMove))
         {
             Stun(STUN_TIME);

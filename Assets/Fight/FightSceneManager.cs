@@ -15,9 +15,6 @@ public class FightSceneManager : MonoBehaviour
 
     private void Awake()
     {
-        FightSetup.PlayerOne.Character = scriptable.Characters[0];
-        FightSetup.PlayerTwo.Character = scriptable.Characters[0];
-
         PlayerOne = Instantiate(FightSetup.PlayerOne.Character);
         PlayerTwo = Instantiate(FightSetup.PlayerTwo.Character);
 

@@ -540,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -551,7 +551,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0.8627451, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -749,7 +749,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0, g: 1, b: 0.8627451, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1149,7 +1149,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 678321345436115654, guid: 2415765a17e1e0b45a67551cf088d642, type: 3}
       propertyPath: m_player
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7263029790689525536, guid: 2415765a17e1e0b45a67551cf088d642, type: 3}
       propertyPath: m_Name
@@ -1326,8 +1326,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278242815
-  m_fontColor: {r: 1, g: 0.80241597, b: 0, a: 1}
+    rgba: 4279042038
+  m_fontColor: {r: 0.96600604, g: 1, b: 0.04705882, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: 3
+  m_MaxPlayerCount: 2
   m_AllowJoining: 1
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_playerOnePick: {fileID: 7263029791917029633}
   m_playerTwoPick: {fileID: 1041650097}
   m_picksField: {fileID: 1169656923}
-  m_prefab: {fileID: 6045049636639159996, guid: ef89ef0c50ba2974cb85abe83c21544e, type: 3}
+  m_prefab: {fileID: 6601800003004076268, guid: ef89ef0c50ba2974cb85abe83c21544e, type: 3}
 --- !u!1 &1435385914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,8 +1977,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278242815
-  m_fontColor: {r: 1, g: 0.80241597, b: 0, a: 1}
+    rgba: 4279042038
+  m_fontColor: {r: 0.96600604, g: 1, b: 0.04705882, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2333,11 +2333,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc86279438cb2f1479adebfd31ca85a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_buttonContainer: {fileID: 256272502}
   m_playButton: {fileID: 349724623}
   m_exitButton: {fileID: 513780465}
   m_vsPopup: {fileID: 49794573}
+  m_charSelectionScreen: {fileID: 1370001916}
   m_p1InputText: {fileID: 2004479856}
   m_p2InputText: {fileID: 1570237793}
+  m_currentMenu: 0
 --- !u!1 &1709723542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,7 +2637,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 678321345436115654, guid: 2415765a17e1e0b45a67551cf088d642, type: 3}
       propertyPath: m_player
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7263029790689525536, guid: 2415765a17e1e0b45a67551cf088d642, type: 3}
       propertyPath: m_Name
