@@ -98,6 +98,8 @@ public class CharacterBase : MonoBehaviour
     public string Name => m_name;
     public Sprite Icon => m_icon;
 
+    public bool Paused;
+
     public void J() { if(m_currentMove != Moveset.j) DoAction(Moveset.j); }
     public void P1() { if (m_currentMove != Moveset.p1) DoAction(Moveset.p1); }
     public void P2() { if (m_currentMove != Moveset.p2) DoAction(Moveset.p2); }
@@ -150,6 +152,21 @@ public class CharacterBase : MonoBehaviour
 
     public void OnWSAD(CallbackContext _context)
     {
+        if (Pause.Paused)
+        {
+            float direction = _context.ReadValue<Vector2>().y;
+            if (direction > 0)
+            {
+                m_manager.MenuUp();
+            }
+            else if (direction < 0)
+            {
+                m_manager.MenuDown();
+            }
+
+            return;
+        }
+
         if (m_stunned) return;
 
         m_moveValue = _context.ReadValue<Vector2>();
@@ -169,8 +186,24 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    public void StartPause(CallbackContext _context)
+    {
+        if (_context.started == true)
+        {
+            m_manager.MenuPause();
+        }
+    }
+
     private void DoAction(Moveset _action)
     {
+        if (Pause.Paused)
+        {
+            if (_action == Moveset.k1)
+            {
+                m_manager.MenuSelect();
+            }
+        }
+
         if (m_stunned || m_currentMove == Moveset.b || m_currentMove == Moveset.j) return;
 
         m_currentMove = _action;

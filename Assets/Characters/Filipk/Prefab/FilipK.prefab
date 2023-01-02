@@ -65,6 +65,7 @@ MonoBehaviour:
     Damage: 10
   - Move: 5
     Damage: 20
+  Paused: 0
 --- !u!114 &7967414670290343609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +172,19 @@ MonoBehaviour:
     m_ActionId: a40e7b0f-bb3c-4499-b376-2dc8264ac192
     m_ActionName: Base/WSAD[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6932790911635042385}
+        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
+        m_MethodName: StartPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d002bdd6-d06a-4cef-b1f1-c83fc2486455
     m_ActionName: Base/Join[/Keyboard/enter,/DualSenseGamepadHID/start]
   m_NeverAutoSwitchControlSchemes: 1

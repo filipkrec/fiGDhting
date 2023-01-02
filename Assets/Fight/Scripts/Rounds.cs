@@ -17,7 +17,7 @@ public class Rounds : MonoBehaviour
     public void SetWinner(int _player, string _characterName)
     {
         m_winner = _player;
-        m_text.text = Regex.Replace(m_winText, "[P]", _characterName);
+        m_text.text = Regex.Replace(m_winText, "[[]P[]]", _characterName);
     }
 
     public void AnimationOver()

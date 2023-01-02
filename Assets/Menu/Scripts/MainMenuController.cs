@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public enum Menu
 {
@@ -45,7 +43,7 @@ public class MainMenuController : MonoBehaviour
             m_buttons.Add(btn);
         }
 
-        if(Players.s_Players.Count != 0)
+        if (Players.s_Players.Count != 0)
         {
             for (int i = 0; i < Players.s_Players.Count; ++i)
             {
@@ -87,7 +85,7 @@ public class MainMenuController : MonoBehaviour
 
         Players.s_Players.Add(player);
 
-        if(Players.s_Players.Count == 2)
+        if (Players.s_Players.Count == 2)
         {
             m_playButton.interactable = true;
         }
@@ -102,7 +100,7 @@ public class MainMenuController : MonoBehaviour
         {
             bool isLast = m_selectedButtonIndex == m_buttons.Count - 1;
             bool isFirst = m_selectedButtonIndex == 0;
-            if(isFirst)
+            if (isFirst)
             {
                 SelectButton(true);
             }
@@ -115,7 +113,7 @@ public class MainMenuController : MonoBehaviour
                 SelectButton(_next);
             }
         }
-        else 
+        else
         {
             m_buttons[m_selectedButtonIndex].Select();
         }
@@ -180,18 +178,18 @@ public class MainMenuController : MonoBehaviour
 
             m_playButton.interactable = false;
 
-            if(_playerIndex == 0)
+            if (_playerIndex == 0)
             {
                 m_p1InputText.text = m_defaultInputText;
             }
-            else if(_playerIndex == 1)
+            else if (_playerIndex == 1)
             {
                 m_p2InputText.text = m_defaultInputText;
             }
         }
         else if (m_currentMenu == Menu.CharacterSelection)
         {
-            if(m_charSelectionScreen.gameObject.activeInHierarchy)
+            if (m_charSelectionScreen.gameObject.activeInHierarchy)
             {
                 bool goBack = m_charSelectionScreen.OnBack(_playerIndex);
 

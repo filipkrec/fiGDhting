@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class CharacterSelectionController : MonoBehaviour
 {
@@ -32,7 +30,7 @@ public class CharacterSelectionController : MonoBehaviour
         Pick(Random.Range(0, m_characterSelections.Count), 0);
         Pick(Random.Range(0, m_characterSelections.Count), 1);
     }
-    
+
     private void Pick(int _characterIndex, int _playerIndex)
     {
         PlayerPick pick = _playerIndex == 0 ? m_playerOnePick : m_playerTwoPick;
@@ -53,7 +51,7 @@ public class CharacterSelectionController : MonoBehaviour
 
     private void UnPick(int _characterIndex)
     {
-        if(_characterIndex == m_playerOnePick.SelectedCharIndex)
+        if (_characterIndex == m_playerOnePick.SelectedCharIndex)
         {
             m_characterSelections[_characterIndex].Border.color = m_scriptable.PlayerOneColor;
         }
@@ -76,7 +74,7 @@ public class CharacterSelectionController : MonoBehaviour
 
     public void OnSelect(int _playerIndex)
     {
-        if(m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
+        if (m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
         {
             foreach (MenuPlayer player in Players.s_Players)
             {
@@ -95,7 +93,7 @@ public class CharacterSelectionController : MonoBehaviour
     {
         PlayerPick pick = _playerIndex == 0 ? m_playerOnePick : m_playerTwoPick;
 
-        if(pick.IsLocked)
+        if (pick.IsLocked)
         {
             LockPick(_playerIndex, false);
             return false;

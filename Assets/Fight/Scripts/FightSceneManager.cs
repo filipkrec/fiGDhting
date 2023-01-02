@@ -8,7 +8,7 @@ public class FightSceneManager : MonoBehaviour
     private static CharacterBase PlayerTwo;
 
     [SerializeField] private Rounds m_rounds;
-    [SerializeField] private MatchWin m_matchWin;
+    [SerializeField] private Pause m_pause;
 
     [SerializeField] private HealthBar m_leftHPBar;
     [SerializeField] private HealthBar m_rightHPBar;
@@ -84,6 +84,7 @@ public class FightSceneManager : MonoBehaviour
         PlayerOne.ResetFight(-m_playerSpawn.x);
         PlayerTwo.ResetFight(m_playerSpawn.x);
         PlayerOne.FaceRight(true);
+        PlayerTwo.FaceRight(false);
     }
 
     public void WinRound(CharacterBase _losingCharacter)
@@ -98,6 +99,43 @@ public class FightSceneManager : MonoBehaviour
 
     public void Win(int _player)
     {
-        m_matchWin.gameObject.SetActive(true);
+        m_pause.SetWinner(_player);
+        m_pause.gameObject.SetActive(true);
+    }
+
+    public void MenuDown()
+    {
+        if(m_pause.isActiveAndEnabled)
+        {
+            m_pause.OnDown();
+        }
+    }
+
+    public void MenuUp()
+    {
+        if (m_pause.isActiveAndEnabled)
+        {
+            m_pause.OnUp();
+        }
+    }
+
+    public void MenuSelect()
+    {
+        if (m_pause.isActiveAndEnabled)
+        {
+            m_pause.OnSelect();
+        }
+    }
+
+    public void MenuPause()
+    {
+        if(!m_pause.Finished && m_pause.gameObject.activeInHierarchy)
+        {
+            m_pause.gameObject.SetActive(false);
+        }
+        else if (!m_pause.gameObject.activeInHierarchy)
+        {
+            m_pause.gameObject.SetActive(true);
+        }
     }
 }
