@@ -28,7 +28,6 @@ public class MainMenuController : MonoBehaviour
     private int m_selectedButtonIndex = 0;
     private string m_defaultInputText;
     private List<Button> m_buttons = new();
-    private List<MenuPlayer> m_players = new();
 
     private void Awake()
     {
@@ -45,10 +44,32 @@ public class MainMenuController : MonoBehaviour
         {
             m_buttons.Add(btn);
         }
+
+        if(Players.s_Players.Count != 0)
+        {
+            for (int i = 0; i < Players.s_Players.Count; ++i)
+            {
+                Players.s_Players[i].gameObject.SetActive(true);
+                Players.s_Players[i].Init(this, Players.s_Players[i].PlayerIndex);
+            }
+
+            PlayerInput p1input = Players.s_Players.Find((x) => x.PlayerIndex == 0).GetComponent<PlayerInput>();
+            PlayerInput p2input = Players.s_Players.Find((x) => x.PlayerIndex == 1).GetComponent<PlayerInput>();
+
+            p1input.SwitchCurrentControlScheme(FightSetup.PlayerOne.Device);
+            p2input.SwitchCurrentControlScheme(FightSetup.PlayerTwo.Device);
+            m_p1InputText.text = $"P1 :\n " + p1input.devices[0].displayName;
+            m_p2InputText.text = $"P2 :\n " + p2input.devices[0].displayName;
+
+            m_playButton.interactable = true;
+            SelectButton(true);
+        }
     }
 
     public void OnPlayerJoined(PlayerInput _playerInput)
     {
+        if (Players.s_Players.Contains(_playerInput.GetComponent<MenuPlayer>())) return;
+
         if (_playerInput.playerIndex == 0)
         {
             SelectButton(true);
@@ -64,9 +85,9 @@ public class MainMenuController : MonoBehaviour
         MenuPlayer player = _playerInput.GetComponent<MenuPlayer>();
         player.Init(this, _playerInput.playerIndex);
 
-        m_players.Add(player);
+        Players.s_Players.Add(player);
 
-        if(m_players.Count == 2)
+        if(Players.s_Players.Count == 2)
         {
             m_playButton.interactable = true;
         }
@@ -152,8 +173,8 @@ public class MainMenuController : MonoBehaviour
     {
         if (m_currentMenu == Menu.MainMenu)
         {
-            MenuPlayer player = m_players.Find((x) => x.PlayerIndex == _playerIndex);
-            m_players.Remove(player);
+            MenuPlayer player = Players.s_Players.Find((x) => x.PlayerIndex == _playerIndex);
+            Players.s_Players.Remove(player);
 
             Destroy(player.gameObject);
 
@@ -187,7 +208,7 @@ public class MainMenuController : MonoBehaviour
 
     private bool CheckPrimaryPlayer(int _playerIndex)
     {
-        if (m_players.Count == 2)
+        if (Players.s_Players.Count == 2)
         {
             return _playerIndex == 0;
         }

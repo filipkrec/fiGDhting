@@ -120,6 +120,7 @@ public class CharacterBase : MonoBehaviour
 
         m_healthBar = _hpBar;
         m_healthBar.SetName(this);
+        m_healthBar.SetHP(1f);
     }
 
     public void FaceRight(bool _true)
@@ -184,6 +185,7 @@ public class CharacterBase : MonoBehaviour
         transform.position += (_directionRight ? 1 : -1) * new Vector3(m_moveSpeed * Time.deltaTime, 0f, 0f);
 
         m_manager.CheckRotations();
+        m_manager.CheckBorders(transform);
     }
 
     private void Block(bool _isBlocking)
@@ -222,6 +224,8 @@ public class CharacterBase : MonoBehaviour
             m_rigidbody.AddForce(force);
 
             m_rigidbody.AddTorque(920);
+
+            m_manager.WinRound(this);
             return;
         }
 
@@ -283,6 +287,24 @@ public class CharacterBase : MonoBehaviour
         {
             enemy.TakeDamage(currentDamage);
         }
+    }
+
+    public void ResetFight(float _startX)
+    {
+        m_lastChance = false;
+        m_healthBar.SetSpecial(false);
+
+        m_rigidbody.gameObject.SetActive(false);
+        m_rigidbody.gameObject.SetActive(true);
+        m_rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        m_currentMove = Moveset.i;
+
+        m_health = m_maxHealth;
+        m_healthBar.SetHP(1f);
+
+        transform.position = new Vector2(_startX, m_baseHeight);
+        m_rigidbody.transform.localPosition = Vector2.zero;
+        m_rigidbody.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 
     private IEnumerator Jump()

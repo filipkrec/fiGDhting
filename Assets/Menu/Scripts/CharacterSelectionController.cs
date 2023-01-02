@@ -78,6 +78,11 @@ public class CharacterSelectionController : MonoBehaviour
     {
         if(m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
         {
+            foreach (MenuPlayer player in Players.s_Players)
+            {
+                player.gameObject.SetActive(false);
+            }
+
             SceneManager.LoadScene(1);
         }
         else
@@ -135,5 +140,6 @@ public class CharacterSelectionController : MonoBehaviour
 
         Pick(newIndex, _playerIndex);
         UnPick(selectedIndex);
+        Pick(newIndex, _playerIndex);
     }
 }

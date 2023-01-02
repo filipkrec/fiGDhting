@@ -43,9 +43,9 @@ public class HealthBar : MonoBehaviour
         StartCoroutine(CatchUpBackBarCoroutine());
     }
 
-    public void SetSpecial()
+    public void SetSpecial(bool _isOn = true)
     {
-        m_specialImage.gameObject.SetActive(true);
+        m_specialImage.gameObject.SetActive(_isOn);
     }
 
     public IEnumerator SetBarCoroutine(Image img, float _fill)

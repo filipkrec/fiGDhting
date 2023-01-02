@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class MenuPlayer : MonoBehaviour
@@ -8,6 +9,11 @@ public class MenuPlayer : MonoBehaviour
 
     public int PlayerIndex => m_playerIndex;
 
+    public void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     public void Init(MainMenuController _controller, int _playerIndex)
     {
         m_playerIndex = _playerIndex;
@@ -16,14 +22,14 @@ public class MenuPlayer : MonoBehaviour
 
     public void OnSelect(CallbackContext _context)
     {
-        if (_context.started != true) return;
+        if (m_controller == null || _context.started != true) return;
 
         m_controller.OnSelect(m_playerIndex);
     }
 
     public void OnWSAD(CallbackContext _context)
     {
-        if (_context.started != true) return;
+        if (m_controller == null || _context.started != true) return;
 
         Vector2 value = _context.ReadValue<Vector2>();
         m_controller.OnWSAD(m_playerIndex, value);
@@ -31,7 +37,7 @@ public class MenuPlayer : MonoBehaviour
 
     public void OnBack(CallbackContext _context)
     {
-        if (_context.started != true) return;
+        if (m_controller == null || _context.started != true) return;
 
         m_controller.OnBack(m_playerIndex);
     }
