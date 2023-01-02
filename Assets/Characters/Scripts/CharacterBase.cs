@@ -25,12 +25,14 @@ public struct MoveDamage
 {
     public Moveset Move;
     public int Damage;
+    public bool HitsMultiple;
 }
 
 public class CharacterBase : MonoBehaviour
 {
     private const float STUN_TIME = 1f;
     private const float STUN_MULTIPLYER = 1.5f;
+    private const float DISPLACE_MULTIPLYER = 0.03f;
 
     private static Dictionary<Moveset, KeyCode> moveKeys = new()
     {
@@ -99,6 +101,7 @@ public class CharacterBase : MonoBehaviour
     public Sprite Icon => m_icon;
 
     public bool Paused;
+    public bool m_actionHit;
 
     public void J() { if(m_currentMove != Moveset.j) DoAction(Moveset.j); }
     public void P1() { if (m_currentMove != Moveset.p1) DoAction(Moveset.p1); }
@@ -145,6 +148,8 @@ public class CharacterBase : MonoBehaviour
 
     public void OnIdle()
     {
+        m_actionHit = false;
+
         if (m_currentMove == Moveset.b) return;
 
         m_currentMove = Moveset.i;
@@ -306,10 +311,13 @@ public class CharacterBase : MonoBehaviour
         if (hardHits.Contains(m_currentMove) && enemy.m_currentMove == Moveset.j) return;
 
         int currentDamage = 0;
+        bool hitMultiple = true;
 
         if (m_moveDamageValues.Exists((x) => x.Move == m_currentMove))
         {
-            currentDamage = m_moveDamageValues.First((x) => x.Move == m_currentMove).Damage;
+            MoveDamage currMove = m_moveDamageValues.First((x) => x.Move == m_currentMove);
+            currentDamage = currMove.Damage;
+            hitMultiple = currMove.HitsMultiple;
         }
 
         if (enemy.m_currentMove == Moveset.b && fastHits.Contains(m_currentMove))
@@ -318,7 +326,13 @@ public class CharacterBase : MonoBehaviour
         }
         else
         {
+            if (m_actionHit && !hitMultiple) return;
+
             enemy.TakeDamage(currentDamage);
+            m_actionHit = true;
+            float displace = DISPLACE_MULTIPLYER * currentDamage * (enemy.FacingRight ? -1 : 1);
+            enemy.transform.position = new Vector2(enemy.transform.position.x + displace, enemy.transform.position.y);
+            m_manager.CheckBorders(enemy.transform);
         }
     }
 
