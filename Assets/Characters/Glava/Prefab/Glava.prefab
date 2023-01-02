@@ -91,6 +91,26 @@ PrefabInstance:
       propertyPath: m_name
       value: Glava
       objectReference: {fileID: 0}
+    - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_icon
       value: 
@@ -98,6 +118,46 @@ PrefabInstance:
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_name
       value: Glava
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_maxHealth
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveDamageValues.Array.data[0].Damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveDamageValues.Array.data[1].Damage
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveDamageValues.Array.data[2].Damage
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveDamageValues.Array.data[3].Damage
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016839574372234708, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8047996
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016839574372234708, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Size.y
+      value: 8.062926
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016839574372234708, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.07432115
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016839574372234708, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.10131216
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}

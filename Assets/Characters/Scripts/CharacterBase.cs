@@ -57,12 +57,12 @@ public class CharacterBase : MonoBehaviour
 
     private static HashSet<Moveset> hardHits = new HashSet<Moveset>()
     {
-        Moveset.k1, Moveset.k2
+        Moveset.k2, Moveset.p2
     };
 
     private static HashSet<Moveset> fastHits = new HashSet<Moveset>()
     {
-        Moveset.p1, Moveset.p2
+        Moveset.k1, Moveset.p1, Moveset.j
     };
 
     [SerializeField] private string m_name;

@@ -12,7 +12,7 @@ public class PlayerPick : MonoBehaviour
     [SerializeField] private CharactersScriptable m_scriptable;
     [SerializeField] private int m_player;
 
-    private int m_selectedCharIndex;
+    private int m_selectedCharIndex = -1;
 
     public int SelectedCharIndex => m_selectedCharIndex;
     public bool IsLocked => m_pickedImage.isActiveAndEnabled;
