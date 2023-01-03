@@ -30,7 +30,7 @@ public struct MoveDamage
 
 public class CharacterBase : MonoBehaviour
 {
-    private const float STUN_TIME = 1f;
+    private const float STUN_TIME = 0.5f;
     private const float STUN_MULTIPLYER = 1.5f;
     private const float DISPLACE_MULTIPLYER = 0.03f;
 
@@ -298,6 +298,7 @@ public class CharacterBase : MonoBehaviour
 
     private void Stun(float _time)
     {
+        m_moveValue = Vector2.zero;
         InteruptAction();
         StartCoroutine(StunCoroutine(_time));
     }
@@ -308,7 +309,7 @@ public class CharacterBase : MonoBehaviour
 
         CharacterBase enemy = _enemyCollider.transform.parent.parent.GetComponent<CharacterBase>();
 
-        if (hardHits.Contains(m_currentMove) && enemy.m_currentMove == Moveset.j) return;
+        if (enemy.m_currentMove == Moveset.j) return;
 
         int currentDamage = 0;
         bool hitMultiple = true;
@@ -320,9 +321,9 @@ public class CharacterBase : MonoBehaviour
             hitMultiple = currMove.HitsMultiple;
         }
 
-        if (enemy.m_currentMove == Moveset.b && fastHits.Contains(m_currentMove))
+        if (enemy.m_currentMove == Moveset.b)
         {
-            Stun(STUN_TIME);
+            Stun(STUN_TIME * (float)currentDamage/10);
         }
         else
         {
