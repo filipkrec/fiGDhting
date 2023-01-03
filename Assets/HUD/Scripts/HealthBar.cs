@@ -14,6 +14,7 @@ public class HealthBar : MonoBehaviour
     [Header("Refs")]
     [SerializeField] private Image m_frontBar;
     [SerializeField] private Image m_backBar;
+    [SerializeField] private Image m_icon;
     [SerializeField] private Image m_specialImage;
     [SerializeField] private TextMeshProUGUI m_name;
 
@@ -24,6 +25,7 @@ public class HealthBar : MonoBehaviour
     public void SetName(CharacterBase _char)
     {
         m_name.text = _char.Name;
+        m_icon.sprite = _char.Icon;
     }
 
     private void Update()
