@@ -26,6 +26,7 @@ public struct MoveDamage
     public Moveset Move;
     public int Damage;
     public bool HitsMultiple;
+    public bool Unbreakable;
 }
 
 public class CharacterBase : MonoBehaviour
@@ -93,6 +94,7 @@ public class CharacterBase : MonoBehaviour
     private bool m_stunned;
     private bool m_lastChance;
     private bool m_facingRight;
+    private bool m_unbreakable;
 
     private Moveset m_currentMove;
 
@@ -144,11 +146,16 @@ public class CharacterBase : MonoBehaviour
         {
             Move(false);
         }
+        else if (m_moveValue.y < 0)
+        {
+            Block(true);
+        }
     }
 
     public void OnIdle()
     {
         m_actionHit = false;
+        m_unbreakable = false;
 
         if (m_currentMove == Moveset.b) return;
 
@@ -176,11 +183,11 @@ public class CharacterBase : MonoBehaviour
 
         m_moveValue = _context.ReadValue<Vector2>();
 
-        if (m_moveValue.y < 0 && m_currentMove != Moveset.b && !hardHits.Contains(m_currentMove))
+        if (m_moveValue.y < 0)
         {
             Block(true);
         }
-        else if ((m_moveValue.y >= 0 || m_moveValue.x != 0) && m_currentMove == Moveset.b)
+        else if (m_moveValue.y >= 0 || m_moveValue.x != 0)
         {
             Block(false);
         }
@@ -211,6 +218,11 @@ public class CharacterBase : MonoBehaviour
 
         if (m_stunned || m_currentMove == Moveset.b || m_currentMove == Moveset.j) return;
 
+        if(m_moveDamageValues.Exists((x) => x.Move == _action && x.Unbreakable))
+        {
+            m_unbreakable = true;
+        }
+
         m_currentMove = _action;
 
         m_animator.SetTrigger(moveTriggers[_action]);
@@ -228,6 +240,8 @@ public class CharacterBase : MonoBehaviour
 
     private void Block(bool _isBlocking)
     {
+        if ((m_currentMove == Moveset.b && _isBlocking) || (m_currentMove != Moveset.b && !_isBlocking)) return;
+
         if (_isBlocking)
         {
             spriteRenderer.material.color = Color.gray;
@@ -250,7 +264,11 @@ public class CharacterBase : MonoBehaviour
         }
 
         m_health -= _damage;
-        InteruptAction();
+
+        if (!m_unbreakable)
+        {
+            InteruptAction();
+        }
         StartCoroutine(TakeDmgCoroutine());
 
         if (m_lastChance)
@@ -312,7 +330,7 @@ public class CharacterBase : MonoBehaviour
         if (enemy.m_currentMove == Moveset.j) return;
 
         int currentDamage = 0;
-        bool hitMultiple = true;
+        bool hitMultiple = false;
 
         if (m_moveDamageValues.Exists((x) => x.Move == m_currentMove))
         {
@@ -323,7 +341,8 @@ public class CharacterBase : MonoBehaviour
 
         if (enemy.m_currentMove == Moveset.b)
         {
-            Stun(STUN_TIME * (float)currentDamage/10);
+            enemy.TakeDamage(currentDamage / 5);
+            Stun(STUN_TIME * (float)currentDamage/10 * (hitMultiple ? 2 : 1));
         }
         else
         {
@@ -331,14 +350,20 @@ public class CharacterBase : MonoBehaviour
 
             enemy.TakeDamage(currentDamage);
             m_actionHit = true;
-            float displace = DISPLACE_MULTIPLYER * currentDamage * (enemy.FacingRight ? -1 : 1);
-            enemy.transform.position = new Vector2(enemy.transform.position.x + displace, enemy.transform.position.y);
-            m_manager.CheckBorders(enemy.transform);
+
+            if (!enemy.m_unbreakable)
+            {
+                float displace = DISPLACE_MULTIPLYER * currentDamage * (enemy.FacingRight ? -1 : 1);
+                enemy.transform.position = new Vector2(enemy.transform.position.x + displace, enemy.transform.position.y);
+                m_manager.CheckBorders(enemy.transform);
+            }
         }
     }
 
     public void ResetFight(float _startX)
     {
+        m_animator.Play("i");
+
         m_lastChance = false;
         m_healthBar.SetSpecial(false);
 
@@ -350,7 +375,7 @@ public class CharacterBase : MonoBehaviour
         m_health = m_maxHealth;
         m_healthBar.SetHP(1f);
 
-        transform.position = new Vector2(_startX, m_baseHeight);
+        transform.rotation = Quaternion.Euler(Vector3.zero);
         m_rigidbody.transform.localPosition = Vector2.zero;
         m_rigidbody.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }

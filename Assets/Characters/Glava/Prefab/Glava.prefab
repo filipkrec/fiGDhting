@@ -141,7 +141,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[3].Damage
-      value: 14
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveDamageValues.Array.data[3].Unbreakable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_moveDamageValues.Array.data[2].HitsMultiple
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8016839574372234708, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Size.x
