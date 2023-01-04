@@ -90,6 +90,7 @@ public class CharacterBase : MonoBehaviour
     private Vector2 m_moveValue;
 
     private float m_baseHeight;
+    private Vector3 m_basePosition;
     private int m_health;
     private bool m_stunned;
     private bool m_lastChance;
@@ -116,6 +117,7 @@ public class CharacterBase : MonoBehaviour
         m_manager = _manager;
 
         m_baseHeight = transform.position.y;
+        m_basePosition = m_rigidbody.transform.localPosition;
         m_currentMove = Moveset.i;
 
         spriteRenderer.material = new Material(spriteRenderer.material);
@@ -325,7 +327,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (!_enemyCollider.CompareTag(ColliderEvent.HURTBOX_TAG)) return;
 
-        CharacterBase enemy = _enemyCollider.transform.parent.parent.GetComponent<CharacterBase>();
+        CharacterBase enemy = _enemyCollider.transform.parent.parent.parent.GetComponent<CharacterBase>();
 
         if (enemy.m_currentMove == Moveset.j) return;
 
@@ -360,7 +362,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void ResetFight(float _startX)
+    public void ResetFight(float _startX, float _startY)
     {
         m_animator.Play("i");
 
@@ -375,8 +377,10 @@ public class CharacterBase : MonoBehaviour
         m_health = m_maxHealth;
         m_healthBar.SetHP(1f);
 
+        transform.position = new Vector2(_startX, _startY);
+
         transform.rotation = Quaternion.Euler(Vector3.zero);
-        m_rigidbody.transform.localPosition = Vector2.zero;
+        m_rigidbody.transform.localPosition = m_basePosition;
         m_rigidbody.transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 

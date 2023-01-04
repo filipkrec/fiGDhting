@@ -396,7 +396,7 @@ MonoBehaviour:
   m_pause: {fileID: 772253346}
   m_leftHPBar: {fileID: 462529950}
   m_rightHPBar: {fileID: 882246112}
-  m_playerSpawn: {x: 2.5, y: -1.2}
+  m_playerSpawn: {x: 2.5, y: -4}
   m_leftBorder: {fileID: 1816943223}
   m_rightBorder: {fileID: 1492249468}
   scriptable: {fileID: 11400000, guid: 0beb6cf3758e07349b3a837dcf97cb02, type: 2}
@@ -1081,6 +1081,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 410219834}
     m_Modifications:
     - target: {fileID: 1784686392891388459, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.2000122
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374603010805476102, guid: 62c4d1eea7185234384b79f587ba3f04, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.2000122
       objectReference: {fileID: 0}

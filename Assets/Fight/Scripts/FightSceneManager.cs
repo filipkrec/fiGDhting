@@ -81,8 +81,8 @@ public class FightSceneManager : MonoBehaviour
 
     public void RestartFight()
     {
-        PlayerOne.ResetFight(-m_playerSpawn.x);
-        PlayerTwo.ResetFight(m_playerSpawn.x);
+        PlayerOne.ResetFight(-m_playerSpawn.x, m_playerSpawn.y);
+        PlayerTwo.ResetFight(m_playerSpawn.x, m_playerSpawn.y);
         PlayerOne.FaceRight(true);
         PlayerTwo.FaceRight(false);
     }
