@@ -76,6 +76,7 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private ColliderEvent m_hitbox;
     [SerializeField] private ColliderEvent m_hurtbox;
     [SerializeField] private Rigidbody2D m_rigidbody;
+    [SerializeField] private GameObject m_effect;
 
     [Header("Stats")]
 
@@ -365,6 +366,15 @@ public class CharacterBase : MonoBehaviour
     public void ResetFight(float _startX, float _startY)
     {
         m_animator.Play("i");
+        m_effect.transform.localPosition = Vector3.zero;
+        m_effect.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        m_effect.transform.localScale = Vector3.one;
+        m_effect.gameObject.SetActive(false);
+
+        BoxCollider2D collider = m_hitbox.GetComponent<BoxCollider2D>();
+        collider.enabled = false;
+        collider.offset = Vector2.zero;
+        collider.size = Vector2.one;
 
         m_lastChance = false;
         m_healthBar.SetSpecial(false);
