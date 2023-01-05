@@ -103,13 +103,17 @@ PrefabInstance:
       propertyPath: m_name
       value: Marko
       objectReference: {fileID: 0}
+    - target: {fileID: 3027457645035623947, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: Collider
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Size.x
-      value: 4.4437656
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Size.y
-      value: 4.351248
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Enabled
@@ -117,11 +121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Offset.x
-      value: -1.485445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Offset.y
-      value: -0.57567406
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6055895137707210030, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_IsActive
@@ -161,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[1].HitsMultiple
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273336383045595583, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_LocalScale.x

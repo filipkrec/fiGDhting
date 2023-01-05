@@ -75,7 +75,6 @@ MonoBehaviour:
     HitsMultiple: 0
     Unbreakable: 0
   Paused: 0
-  m_actionHit: 0
 --- !u!114 &7967414670290343609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +105,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6932790911635042385}
         m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
         m_MethodName: P1
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -122,7 +121,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6932790911635042385}
         m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
         m_MethodName: P2
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -138,7 +137,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6932790911635042385}
         m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
         m_MethodName: K1
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -154,7 +153,7 @@ MonoBehaviour:
       - m_Target: {fileID: 6932790911635042385}
         m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
         m_MethodName: K2
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -268,11 +267,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2463742963905443564}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49c814b4ba8ac1243944e1d8b5dd414b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 5932667586941094348}
 --- !u!1 &4695643063064130901
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c814b4ba8ac1243944e1d8b5dd414b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
 --- !u!1 &8564587998465681632
 GameObject:
   m_ObjectHideFlags: 0

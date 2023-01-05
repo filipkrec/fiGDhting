@@ -105,13 +105,12 @@ public class CharacterBase : MonoBehaviour
     public Sprite Icon => m_icon;
 
     public bool Paused;
-    public bool m_actionHit;
 
-    public void J() { if(m_currentMove != Moveset.j) DoAction(Moveset.j); }
-    public void P1() { if (m_currentMove != Moveset.p1) DoAction(Moveset.p1); }
-    public void P2() { if (m_currentMove != Moveset.p2) DoAction(Moveset.p2); }
-    public void K1() { if (m_currentMove != Moveset.k1) DoAction(Moveset.k1); }
-    public void K2() { if (m_currentMove != Moveset.k2) DoAction(Moveset.k2); }
+    public void J(CallbackContext _context) { if(_context.started && m_currentMove != Moveset.j) DoAction(Moveset.j); }
+    public void P1(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.p1) DoAction(Moveset.p1); }
+    public void P2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.p2) DoAction(Moveset.p2); }
+    public void K1(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k1) DoAction(Moveset.k1); }
+    public void K2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k2) DoAction(Moveset.k2); }
 
     public void Setup(HealthBar _hpBar, FightSceneManager _manager)
     {
@@ -161,7 +160,6 @@ public class CharacterBase : MonoBehaviour
 
     public void OnIdle()
     {
-        m_actionHit = false;
         m_unbreakable = false;
 
         if (m_currentMove == Moveset.b) return;
@@ -223,7 +221,7 @@ public class CharacterBase : MonoBehaviour
             }
         }
 
-        if (m_stunned || m_currentMove == Moveset.b || m_currentMove == Moveset.j) return;
+        if (m_stunned || m_currentMove != Moveset.i) return;
 
         if(m_moveDamageValues.Exists((x) => x.Move == _action && x.Unbreakable))
         {
@@ -353,10 +351,7 @@ public class CharacterBase : MonoBehaviour
         }
         else
         {
-            if (m_actionHit && !hitMultiple) return;
-
             enemy.TakeDamage(currentDamage);
-            m_actionHit = true;
 
             if (!enemy.m_unbreakable)
             {
