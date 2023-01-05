@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class FightSceneManager : MonoBehaviour
 {
@@ -81,10 +82,7 @@ public class FightSceneManager : MonoBehaviour
 
     public void RestartFight()
     {
-        PlayerOne.ResetFight(-m_playerSpawn.x, m_playerSpawn.y);
-        PlayerTwo.ResetFight(m_playerSpawn.x, m_playerSpawn.y);
-        PlayerOne.FaceRight(true);
-        PlayerTwo.FaceRight(false);
+        SceneManager.LoadScene(1);
     }
 
     public void WinRound(CharacterBase _losingCharacter)

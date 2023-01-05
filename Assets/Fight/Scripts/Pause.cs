@@ -15,7 +15,7 @@ public class Pause : MonoBehaviour
     private const string WIN_TEXT = "[P] Victory";
 
     [SerializeField] private TextMeshProUGUI m_text;
-    [SerializeField] private Button m_restartButton; 
+    [SerializeField] private Button m_restartButton;
     [SerializeField] private Button m_backButton;
 
     private Button m_selectedButton;
@@ -45,7 +45,9 @@ public class Pause : MonoBehaviour
     public void SetWinner(int _player)
     {
         m_text.gameObject.SetActive(true);
-        m_text.text = Regex.Replace(WIN_TEXT,"[[]P[]]", "P" + _player);
+        m_text.text = Regex.Replace(WIN_TEXT, "[[]P[]]", "P" + _player);
+
+        m_finished = true;
     }
 
     internal void OnDown()
