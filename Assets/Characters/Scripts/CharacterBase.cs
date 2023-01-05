@@ -365,33 +365,25 @@ public class CharacterBase : MonoBehaviour
 
     public void ResetFight(float _startX, float _startY)
     {
-        m_animator.Play("i");
-        m_effect.transform.localPosition = Vector3.zero;
-        m_effect.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        m_effect.transform.localScale = Vector3.one;
-        m_effect.gameObject.SetActive(false);
-
-        BoxCollider2D collider = m_hitbox.GetComponent<BoxCollider2D>();
-        collider.enabled = false;
-        collider.offset = Vector2.zero;
-        collider.size = Vector2.one;
-
-        m_lastChance = false;
-        m_healthBar.SetSpecial(false);
+        //m_animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+       
 
         m_rigidbody.gameObject.SetActive(false);
         m_rigidbody.gameObject.SetActive(true);
+
         m_rigidbody.bodyType = RigidbodyType2D.Kinematic;
         m_currentMove = Moveset.i;
-
+        m_lastChance = false;
+        m_healthBar.SetSpecial(false);
         m_health = m_maxHealth;
         m_healthBar.SetHP(1f);
 
         transform.position = new Vector2(_startX, _startY);
-
         transform.rotation = Quaternion.Euler(Vector3.zero);
         m_rigidbody.transform.localPosition = m_basePosition;
         m_rigidbody.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        
+        m_animator.Play("i");
     }
 
     private IEnumerator Jump()
