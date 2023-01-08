@@ -45,6 +45,8 @@ public class Rounds : MonoBehaviour
         if (p1wins == 2 || p2wins == 2)
         {
             m_manager.Win(m_winner);
+            p1wins = 0;
+            p2wins = 0;
         }
         else
         {

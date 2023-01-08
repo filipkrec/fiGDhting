@@ -74,7 +74,6 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator m_animator;
     [SerializeField] private ColliderEvent m_hitbox;
-    [SerializeField] private ColliderEvent m_hurtbox;
     [SerializeField] private Rigidbody2D m_rigidbody;
     [SerializeField] private GameObject m_effect;
 
