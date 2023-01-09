@@ -23,7 +23,8 @@ public class Rounds : MonoBehaviour
         {
             m_p1Round.SetActive(true);
         }
-        else if(p2wins == 1)
+        
+        if(p2wins == 1)
         {
             m_p1Round.SetActive(true);
         }
