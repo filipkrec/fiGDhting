@@ -26,7 +26,7 @@ public class Rounds : MonoBehaviour
         
         if(p2wins == 1)
         {
-            m_p1Round.SetActive(true);
+            m_p2Round.SetActive(true);
         }
 
         gameObject.SetActive(false);

@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[1].HitsMultiple
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7273336383045595583, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_LocalScale.x

@@ -32,6 +32,7 @@ public struct MoveDamage
 public class CharacterBase : MonoBehaviour
 {
     private const float STUN_TIME = 0.5f;
+    private const float BREAK_STUN_TIME = 2f;
     private const float STUN_MULTIPLYER = 1.5f;
     private const float DISPLACE_MULTIPLYER = 0.03f;
 
@@ -80,7 +81,6 @@ public class CharacterBase : MonoBehaviour
     [Header("Stats")]
 
     [SerializeField] private float m_moveSpeed = 10f;
-    [SerializeField] private float m_jumpHeight = 2f;
     [SerializeField] private int m_maxHealth = 10;
     [SerializeField] List<MoveDamage> m_moveDamageValues;
 
@@ -195,11 +195,6 @@ public class CharacterBase : MonoBehaviour
         {
             Block(false);
         }
-
-        if (m_moveValue.y > 0 && m_currentMove != Moveset.j)
-        {
-            StartCoroutine(Jump());
-        }
     }
 
     public void StartPause(CallbackContext _context)
@@ -269,14 +264,12 @@ public class CharacterBase : MonoBehaviour
 
         m_health -= _damage;
 
-        if (!m_unbreakable)
-        {
-            InteruptAction();
-        }
-        StartCoroutine(TakeDmgCoroutine());
-
         if (m_lastChance)
         {
+            if (m_currentMove == Moveset.b) return;
+
+            m_animator.enabled = false;
+
             m_rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
             Vector2 force = Vector2.one * ((float)_damage) / 100f;
@@ -288,6 +281,12 @@ public class CharacterBase : MonoBehaviour
             m_manager.WinRound(this);
             return;
         }
+
+        if (!m_unbreakable)
+        {
+            InteruptAction();
+        }
+        StartCoroutine(TakeDmgCoroutine());
 
         m_healthBar.SetHP((float)m_health / m_maxHealth);
 
@@ -307,15 +306,7 @@ public class CharacterBase : MonoBehaviour
             m_animator.ResetTrigger(trigger.Value);
         }
 
-        InteruptJump();
-
         m_currentMove = Moveset.i;
-    }
-
-    private void InteruptJump()
-    {
-        StopAllCoroutines();
-        transform.position = new Vector2(transform.position.x, m_baseHeight);
     }
 
     private void Stun(float _time)
@@ -331,8 +322,6 @@ public class CharacterBase : MonoBehaviour
 
         CharacterBase enemy = _enemyCollider.transform.parent.parent.parent.GetComponent<CharacterBase>();
 
-        if (enemy.m_currentMove == Moveset.j) return;
-
         int currentDamage = 0;
         bool hitMultiple = false;
 
@@ -345,11 +334,21 @@ public class CharacterBase : MonoBehaviour
 
         if (enemy.m_currentMove == Moveset.b)
         {
-            enemy.TakeDamage(currentDamage / 5);
-            Stun(STUN_TIME * (float)currentDamage/10 * (hitMultiple ? 2 : 1));
+            if(m_currentMove == Moveset.j)
+            {
+                enemy.Stun(BREAK_STUN_TIME);
+            }
+            else
+            {
+                enemy.TakeDamage(currentDamage / 5);
+                Stun(STUN_TIME * (float)currentDamage / 10 * (hitMultiple ? 2 : 1));
+            }
+
         }
         else
         {
+            if (m_currentMove == Moveset.j) return;
+
             enemy.TakeDamage(currentDamage);
 
             if (!enemy.m_unbreakable)
@@ -359,26 +358,6 @@ public class CharacterBase : MonoBehaviour
                 m_manager.CheckBorders(enemy.transform);
             }
         }
-    }
-
-    private IEnumerator Jump()
-    {
-        m_currentMove = Moveset.j;
-        m_animator.SetTrigger(moveTriggers[Moveset.j]);
-        float timer = 1f;
-
-        while (timer > 0f)
-        {
-            timer -= Time.deltaTime;
-            transform.position = new Vector2(transform.position.x, m_baseHeight + m_jumpHeight * (1f - Mathf.Abs(0.5f - timer) * 2));
-            yield return null;
-        }
-
-        timer = 0f;
-        transform.position = new Vector2(transform.position.x, m_baseHeight + m_jumpHeight * (1f - Mathf.Abs(0.5f - timer) * 2));
-
-        m_currentMove = Moveset.i;
-        yield return null;
     }
 
     private IEnumerator TakeDmgCoroutine()

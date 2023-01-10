@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterSelection : MonoBehaviour
+public class Selection : MonoBehaviour
 {
     public Image Icon;
     public Image Border;

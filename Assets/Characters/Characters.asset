@@ -16,8 +16,10 @@ MonoBehaviour:
   PlayerTwoColor: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
   MixedColor: {r: 1, g: 0, b: 0.9315591, a: 1}
   Characters:
+  - {fileID: 6932790911635042385, guid: e534030513392124e866592bca470cfc, type: 3}
   - {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
   - {fileID: 2162871770648686177, guid: 30564694cc7023841885e16256630bac, type: 3}
   - {fileID: 3738877830614123234, guid: 52de297ca962f384490e7c8d7c42502b, type: 3}
   - {fileID: 1953889722603708067, guid: b091635ed830e4440b9047c3e1846cb9, type: 3}
   - {fileID: 8363338839085808311, guid: 3b3ef15f6534135429fc7fa894a3d277, type: 3}
+  - {fileID: 3280031518941740326, guid: e5e15465f87960a40be33d3fed5dc9b9, type: 3}

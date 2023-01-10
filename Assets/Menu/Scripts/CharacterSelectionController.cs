@@ -4,23 +4,24 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelectionController : MonoBehaviour
 {
-    const int FIELD_WIDTH = 4;
+    public const int FIELD_WIDTH = 4;
 
     [SerializeField] private CharactersScriptable m_scriptable;
     [SerializeField] private PlayerPick m_playerOnePick;
     [SerializeField] private PlayerPick m_playerTwoPick;
 
     [SerializeField] private GameObject m_picksField;
-    [SerializeField] private CharacterSelection m_prefab;
+    [SerializeField] private Selection m_prefab;
+    [SerializeField] private StageSelection m_stageSelection;
 
-    private List<CharacterSelection> m_characterSelections = new();
+    private List<Selection> m_characterSelections = new();
     private int m_rowCount;
 
     private void Start()
     {
         foreach (CharacterBase character in m_scriptable.Characters)
         {
-            CharacterSelection characterSelection = Instantiate(m_prefab, m_picksField.transform);
+            Selection characterSelection = Instantiate(m_prefab, m_picksField.transform);
             characterSelection.Icon.sprite = character.Icon;
             m_characterSelections.Add(characterSelection);
         }
@@ -69,7 +70,18 @@ public class CharacterSelectionController : MonoBehaviour
     {
         PlayerPick pick = _playerIndex == 0 ? m_playerOnePick : m_playerTwoPick;
 
-        pick.Lock(_lock);
+        if (pick.SelectedCharIndex == 0)
+        {
+            int newIndex = Random.Range(1, m_characterSelections.Count);
+            Pick(newIndex, _playerIndex);
+            UnPick(0);
+            Pick(newIndex, _playerIndex);
+            LockPick(_playerIndex);
+        }
+        else
+        {
+            pick.Lock(_lock);
+        }
     }
 
     public void OnSelect(int _playerIndex)
@@ -81,7 +93,9 @@ public class CharacterSelectionController : MonoBehaviour
                 player.gameObject.SetActive(false);
             }
 
-            SceneManager.LoadScene(1);
+            gameObject.SetActive(false);
+            m_stageSelection.gameObject.SetActive(true);
+
         }
         else
         {

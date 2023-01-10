@@ -51,11 +51,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 917445785128656011}
   m_animator: {fileID: 1127136147194153020}
   m_hitbox: {fileID: 3371525295180926202}
-  m_hurtbox: {fileID: 0}
   m_rigidbody: {fileID: 7648880477497499642}
   m_effect: {fileID: 6055895137707210030}
   m_moveSpeed: 9
-  m_jumpHeight: 2
   m_maxHealth: 110
   m_moveDamageValues:
   - Move: 1
@@ -74,6 +72,10 @@ MonoBehaviour:
     Damage: 20
     HitsMultiple: 0
     Unbreakable: 0
+  - Move: 3
+    Damage: 0
+    HitsMultiple: 0
+    Unbreakable: 1
   Paused: 0
 --- !u!114 &7967414670290343609
 MonoBehaviour:
@@ -196,6 +198,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d002bdd6-d06a-4cef-b1f1-c83fc2486455
     m_ActionName: Base/Join[/Keyboard/enter,/DualSenseGamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6932790911635042385}
+        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
+        m_MethodName: J
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 79eb1da3-6c1b-4bd2-9514-38e2c9c8395b
+    m_ActionName: Base/J[/Keyboard/upArrow,/XInputControllerWindows/dpad/up,/XInputControllerWindows1/dpad/up]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Base
@@ -332,7 +350,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.02722564}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2253876040175800181}
   m_RootOrder: 2
