@@ -162,11 +162,11 @@ public class StageSelection : MonoBehaviour
     {
         if(_playerIndex == 0)
         {
-            m_playerOnePick.Lock(_true);
+            m_playerOnePick.Lock(_true, true);
         }
         else if (_playerIndex == 1)
         {
-            m_playerTwoPick.Lock(_true);
+            m_playerTwoPick.Lock(_true, true);
         }
     }
 

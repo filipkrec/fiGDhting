@@ -40,9 +40,11 @@ public class PlayerPick : MonoBehaviour
         m_selectedCharIndex = _index;
     }
 
-    public void Lock(bool _true)
+    public void Lock(bool _true, bool _isStageSelection = false)
     {
         m_pickedImage.gameObject.SetActive(_true);
+
+        if (_isStageSelection) return;
 
         if (m_player == 0)
         {
