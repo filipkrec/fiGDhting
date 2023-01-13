@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FightSceneManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class FightSceneManager : MonoBehaviour
 
     [SerializeField] private Rounds m_rounds;
     [SerializeField] private Pause m_pause;
+    [SerializeField] private Image m_stage; 
 
     [SerializeField] private HealthBar m_leftHPBar;
     [SerializeField] private HealthBar m_rightHPBar;
@@ -27,6 +29,8 @@ public class FightSceneManager : MonoBehaviour
             FightSetup.PlayerOne.Character = scriptable.Characters[0];
             FightSetup.PlayerTwo.Character = scriptable.Characters[2];
         }
+
+        m_stage.sprite = FightSetup.SelectedStage;
 
         PlayerOne = Instantiate(FightSetup.PlayerOne.Character);
         PlayerTwo = Instantiate(FightSetup.PlayerTwo.Character);

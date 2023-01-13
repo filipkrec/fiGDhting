@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public enum Menu
 {
     MainMenu,
-    CharacterSelection
+    CharacterSelection,
+    StageSelection,
 }
 
 public class MainMenuController : MonoBehaviour
@@ -18,6 +19,7 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] private GameObject m_vsPopup;
     [SerializeField] private CharacterSelectionController m_charSelectionScreen;
+    [SerializeField] private StageSelection m_stageSelectionScreen;
 
     [SerializeField] private TextMeshProUGUI m_p1InputText;
     [SerializeField] private TextMeshProUGUI m_p2InputText;
@@ -124,7 +126,7 @@ public class MainMenuController : MonoBehaviour
         if (m_currentMenu != Menu.MainMenu) return;
 
         m_currentMenu = Menu.CharacterSelection;
-        m_vsPopup.SetActive(true);//Plays the animation with event to switch CharSelection to active
+        m_vsPopup.SetActive(true); //Plays the animation with event to switch CharSelection to active
     }
 
     private void Exit()
@@ -143,7 +145,14 @@ public class MainMenuController : MonoBehaviour
         }
         else if (m_currentMenu == Menu.CharacterSelection)
         {
-            m_charSelectionScreen.OnSelect(_playerIndex);
+            if(m_charSelectionScreen.OnSelect(_playerIndex))
+            {
+                m_currentMenu = Menu.StageSelection;
+            }
+        }
+        else if (m_currentMenu == Menu.StageSelection)
+        {
+            m_stageSelectionScreen.OnSelect(_playerIndex);
         }
     }
 
@@ -164,6 +173,10 @@ public class MainMenuController : MonoBehaviour
         else if (m_currentMenu == Menu.CharacterSelection)
         {
             m_charSelectionScreen.OnWSAD(_playerIndex, _value);
+        }
+        else if (m_currentMenu == Menu.StageSelection)
+        {
+            m_stageSelectionScreen.OnWSAD(_playerIndex, _value);
         }
     }
 
@@ -199,6 +212,20 @@ public class MainMenuController : MonoBehaviour
                     SelectButton(true);
                     m_charSelectionScreen.gameObject.SetActive(false);
                     m_currentMenu = Menu.MainMenu;
+                }
+            }
+        }
+        else if (m_currentMenu == Menu.StageSelection)
+        {
+            if (m_stageSelectionScreen.gameObject.activeInHierarchy)
+            {
+                bool goBack = m_stageSelectionScreen.OnBack(_playerIndex);
+
+                if (goBack)
+                {
+                    m_stageSelectionScreen.gameObject.SetActive(false);
+                    m_charSelectionScreen.gameObject.SetActive(true);
+                    m_currentMenu = Menu.CharacterSelection;
                 }
             }
         }

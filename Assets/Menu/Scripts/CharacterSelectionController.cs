@@ -84,22 +84,18 @@ public class CharacterSelectionController : MonoBehaviour
         }
     }
 
-    public void OnSelect(int _playerIndex)
+    public bool OnSelect(int _playerIndex)
     {
         if (m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
         {
-            foreach (MenuPlayer player in Players.s_Players)
-            {
-                player.gameObject.SetActive(false);
-            }
-
             gameObject.SetActive(false);
             m_stageSelection.gameObject.SetActive(true);
-
+            return true;
         }
         else
         {
             LockPick(_playerIndex);
+            return false;
         }
     }
 

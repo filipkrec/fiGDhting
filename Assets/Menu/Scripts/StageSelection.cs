@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StageSelection : MonoBehaviour
 {
@@ -11,10 +12,10 @@ public class StageSelection : MonoBehaviour
     [SerializeField] private Selection m_prefab;
     [SerializeField] private GameObject m_picksField;
 
-    private int p1pick;
-    private int p2pick;
-    private bool p1Locked;
-    private bool p2Locked;
+    [SerializeField] private PlayerPick m_playerOnePick;
+    [SerializeField] private PlayerPick m_playerTwoPick;
+
+    [SerializeField] private Image m_selectedStage;
 
     private List<Selection> m_characterSelections = new();
     private int m_rowCount;
@@ -38,16 +39,16 @@ public class StageSelection : MonoBehaviour
     {
         if (_playerIndex == 0)
         {
-            p1pick = _characterIndex;
+            m_playerOnePick.SetStage(_characterIndex);
         }
         else
         {
-            p2pick = _characterIndex;
+            m_playerTwoPick.SetStage(_characterIndex);
         }
 
         m_characterSelections[_characterIndex].Border.gameObject.SetActive(true);
 
-        if (p1pick == p2pick)
+        if (m_playerOnePick.SelectedCharIndex == m_playerTwoPick.SelectedCharIndex)
         {
             m_characterSelections[_characterIndex].Border.color = m_charScriptable.MixedColor;
         }
@@ -59,11 +60,11 @@ public class StageSelection : MonoBehaviour
 
     private void UnPick(int _characterIndex)
     {
-        if (_characterIndex == p1pick)
+        if (_characterIndex == m_playerOnePick.SelectedCharIndex)
         {
             m_characterSelections[_characterIndex].Border.color = m_charScriptable.PlayerOneColor;
         }
-        else if (_characterIndex == p2pick)
+        else if (_characterIndex == m_playerTwoPick.SelectedCharIndex)
         {
             m_characterSelections[_characterIndex].Border.color = m_charScriptable.PlayerTwoColor;
         }
@@ -75,7 +76,7 @@ public class StageSelection : MonoBehaviour
 
     private void LockPick(int _playerIndex, bool _lock = true)
     {
-        int pick = _playerIndex == 0 ? p1pick : p2pick;
+        int pick = _playerIndex == 0 ? m_playerOnePick.SelectedCharIndex : m_playerTwoPick.SelectedCharIndex;
 
         if (pick == 0)
         {
@@ -87,20 +88,19 @@ public class StageSelection : MonoBehaviour
         }
         else
         {
-            Lock(_playerIndex, pick, _lock);
+            Lock(_playerIndex, _lock);
         }
     }
 
     public void OnSelect(int _playerIndex)
     {
-        if (p1Locked && p2Locked)
+        if (m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
         {
             foreach (MenuPlayer player in Players.s_Players)
             {
                 player.gameObject.SetActive(false);
             }
-
-            SceneManager.LoadScene(1);
+            StartCoroutine(StartGameCoroutine());
         }
         else
         {
@@ -110,9 +110,9 @@ public class StageSelection : MonoBehaviour
 
     public bool OnBack(int _playerIndex)
     {
-        int pick = _playerIndex == 0 ? p1pick : p2pick;
+        int pick = _playerIndex == 0 ? m_playerOnePick.SelectedCharIndex : m_playerTwoPick.SelectedCharIndex;
 
-        if ((p1Locked && _playerIndex == 0) || (p2Locked && _playerIndex == 1))
+        if ((m_playerOnePick.IsLocked && _playerIndex == 0) || (m_playerTwoPick.IsLocked && _playerIndex == 1))
         {
             LockPick(_playerIndex, false);
             return false;
@@ -123,10 +123,9 @@ public class StageSelection : MonoBehaviour
 
     public void OnWSAD(int _playerIndex, Vector2 _value)
     {
+        if ((m_playerOnePick.IsLocked && _playerIndex == 0) || (m_playerTwoPick.IsLocked && _playerIndex == 1)) return;
 
-        if ((p1Locked && _playerIndex == 0) || (p2Locked && _playerIndex == 1)) return;
-
-        int selectedIndex = _playerIndex == 0 ? p1pick : p2pick;
+        int selectedIndex = _playerIndex == 0 ? m_playerOnePick.SelectedCharIndex : m_playerTwoPick.SelectedCharIndex;
 
         int row = Mathf.FloorToInt((float)selectedIndex / CharacterSelectionController.FIELD_WIDTH);
         int column = selectedIndex - (row * CharacterSelectionController.FIELD_WIDTH);
@@ -159,17 +158,75 @@ public class StageSelection : MonoBehaviour
         Pick(newIndex, _playerIndex);
     }
 
-    private void Lock(int _playerIndex, int _pick, bool _true)
+    private void Lock(int _playerIndex, bool _true)
     {
         if(_playerIndex == 0)
         {
-            p1pick = _pick;
-            p1Locked = _true;
+            m_playerOnePick.Lock(_true);
         }
         else if (_playerIndex == 1)
         {
-            p2pick = _pick;
-            p2Locked = _true;
+            m_playerTwoPick.Lock(_true);
         }
+    }
+
+    private IEnumerator StartGameCoroutine()
+    {
+        m_selectedStage.gameObject.SetActive(true);
+
+        int selected = 0;
+
+        if (m_playerOnePick.SelectedCharIndex == m_playerTwoPick.SelectedCharIndex)
+        {
+            m_selectedStage.sprite = m_playerOnePick.m_image.sprite;
+        }
+        else
+        {
+            float time = Random.Range(1f, 3f);
+            float step = 0.1f;
+
+            while(time > 0)
+            {
+
+                selected = SwapSelected(selected);
+                time -= step;
+                yield return new WaitForSeconds(step);
+            }
+
+            time = 2f;
+            while(time > 0f)
+            {
+                selected = SwapSelected(selected);
+                float progressiveStep = Mathf.Lerp(2.1f - time, 2f, 0.5f);
+                time -= progressiveStep;
+                yield return new WaitForSeconds(progressiveStep);
+            }
+        }
+
+        selected = SwapSelected(selected);
+        yield return new WaitForSeconds(2f);
+
+        FightSetup.SelectedStage = selected == 
+            0 
+            ? m_scriptable.stages[m_playerOnePick.SelectedCharIndex] 
+            : m_scriptable.stages[m_playerTwoPick.SelectedCharIndex];
+
+        SceneManager.LoadScene(1);
+    }
+
+    private int SwapSelected(int current)
+    {
+        int selected = current == 0 ? 1 : 0;
+
+        if(selected == 0)
+        {
+            m_selectedStage.sprite = m_playerOnePick.m_image.sprite;
+        }
+        else if (selected == 1)
+        {
+            m_selectedStage.sprite = m_playerTwoPick.m_image.sprite;
+        }
+
+        return selected;
     }
 }

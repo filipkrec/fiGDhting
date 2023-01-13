@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public struct PlayerSetup
@@ -10,6 +11,6 @@ public static class FightSetup
 {
     public static PlayerSetup PlayerOne;
     public static PlayerSetup PlayerTwo;
-    public static string Stage;
+    public static Sprite SelectedStage;
     public static int rounds;
 }
