@@ -105,6 +105,8 @@ public class CharacterBase : MonoBehaviour
 
     public bool Paused;
 
+    public PlayerAudioManager PlayerAudioManager;
+
     public void J(CallbackContext _context) { if(_context.started && m_currentMove != Moveset.j) DoAction(Moveset.j); }
     public void P1(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.p1) DoAction(Moveset.p1); }
     public void P2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.p2) DoAction(Moveset.p2); }
@@ -341,7 +343,7 @@ public class CharacterBase : MonoBehaviour
             else
             {
                 enemy.TakeDamage(currentDamage / 5);
-                Stun(STUN_TIME * (float)currentDamage / 10 * (hitMultiple ? 2 : 1));
+                Stun(STUN_TIME * (float)currentDamage / 10 * (hitMultiple ? 2 : 1));                
             }
 
         }
@@ -350,6 +352,7 @@ public class CharacterBase : MonoBehaviour
             if (m_currentMove == Moveset.j) return;
 
             enemy.TakeDamage(currentDamage);
+            PlayerAudioManager.PlayHitSound(m_currentMove);
 
             if (!enemy.m_unbreakable)
             {

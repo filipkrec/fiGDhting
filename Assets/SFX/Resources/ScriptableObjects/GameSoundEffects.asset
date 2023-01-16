@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786fd570e14115b4ca61de2612a1417f, type: 3}
   m_Name: GameSoundEffects
   m_EditorClassIdentifier: 
-  LightPunchHit: {fileID: 0}
-  HeavyPunchHit: {fileID: 0}
-  LightKickHit: {fileID: 0}
-  HeavyKickHit: {fileID: 0}
+  HitSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 8300000, guid: 8a0dfa97e8f7b1c48b5a285b3f642436, type: 3}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: 77eb2a995e787964fb8fb8f845fcf2b4, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 8300000, guid: 25d15009f47684848b86c6624d91a2ae, type: 3}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: 34b318850ef140446833dd00200ece2e, type: 3}

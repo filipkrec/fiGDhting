@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7919f2ef215c23d4695979cdf273f917, type: 3}
   m_Name: KrecSoundEffects
   m_EditorClassIdentifier: 
-  LightPunch: {fileID: 0}
-  HeavyPunch: {fileID: 8300000, guid: 17c89c59921de3541803b831f1063115, type: 3}
-  LightKick: {fileID: 0}
-  HeavyKick: {fileID: 8300000, guid: 3c542aeda5e661a4b8af1040751fd065, type: 3}
+  AttackSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 0}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: 17c89c59921de3541803b831f1063115, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 0}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: 3c542aeda5e661a4b8af1040751fd065, type: 3}
