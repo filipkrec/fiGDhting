@@ -24,8 +24,8 @@ public class FightSceneManager : MonoBehaviour
     {
         if(FightSetup.PlayerOne.Character == null && FightSetup.PlayerTwo.Character == null)
         {
-            FightSetup.PlayerOne.Character = scriptable.Characters[1];
-            FightSetup.PlayerTwo.Character = scriptable.Characters[2];
+            FightSetup.PlayerOne.Character = scriptable.Characters[5];
+            FightSetup.PlayerTwo.Character = scriptable.Characters[6];
         }
 
         PlayerOne = Instantiate(FightSetup.PlayerOne.Character);
