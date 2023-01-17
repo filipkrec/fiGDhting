@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7919f2ef215c23d4695979cdf273f917, type: 3}
   m_Name: GlavaSoundEffects
   m_EditorClassIdentifier: 
-  LightPunch: {fileID: 0}
-  HeavyPunch: {fileID: 8300000, guid: 04998765d70eeb24c96c19cafccce0c5, type: 3}
-  LightKick: {fileID: 0}
-  HeavyKick: {fileID: 8300000, guid: 046bd57c98a800a49b01d385c6b5efa5, type: 3}
+  AttackSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 0}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: 04998765d70eeb24c96c19cafccce0c5, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 0}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: 046bd57c98a800a49b01d385c6b5efa5, type: 3}

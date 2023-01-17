@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 733360523605550160, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: CharacterSoundEffects
+      value: 
+      objectReference: {fileID: 11400000, guid: 92eb551207a80e845a9363dec0b21bc3, type: 2}
     - target: {fileID: 917445785128656011, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Sprite
       value: 

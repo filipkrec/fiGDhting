@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7919f2ef215c23d4695979cdf273f917, type: 3}
   m_Name: MarkoSoundEffects
   m_EditorClassIdentifier: 
-  LightPunch: {fileID: 8300000, guid: 6d9fadf3764d8b6478d5c1cdf7c932be, type: 3}
-  HeavyPunch: {fileID: 8300000, guid: 74c41909618fd44409cba947279caaa0, type: 3}
-  LightKick: {fileID: 8300000, guid: 76135a954e4b0e64d9dd19d33365046d, type: 3}
-  HeavyKick: {fileID: 8300000, guid: a5414aef005553841836900769681fdd, type: 3}
+  AttackSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 8300000, guid: 6d9fadf3764d8b6478d5c1cdf7c932be, type: 3}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: 74c41909618fd44409cba947279caaa0, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 8300000, guid: 76135a954e4b0e64d9dd19d33365046d, type: 3}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: a5414aef005553841836900769681fdd, type: 3}

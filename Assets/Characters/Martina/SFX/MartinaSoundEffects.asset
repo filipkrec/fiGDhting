@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7919f2ef215c23d4695979cdf273f917, type: 3}
   m_Name: MartinaSoundEffects
   m_EditorClassIdentifier: 
-  LightPunch: {fileID: 8300000, guid: f17ddbdfd6ec23549af91b7d49a5d9a4, type: 3}
-  HeavyPunch: {fileID: 8300000, guid: 31e20dca91bea304bb93e28f1b3d2123, type: 3}
-  LightKick: {fileID: 0}
-  HeavyKick: {fileID: 8300000, guid: f17ddbdfd6ec23549af91b7d49a5d9a4, type: 3}
+  AttackSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 8300000, guid: b7c272f1f8363d24e86431c7d7245c03, type: 3}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: 31e20dca91bea304bb93e28f1b3d2123, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 0}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: f17ddbdfd6ec23549af91b7d49a5d9a4, type: 3}
