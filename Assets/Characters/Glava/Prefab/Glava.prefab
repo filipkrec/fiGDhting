@@ -161,7 +161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_maxHealth
-      value: 110
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveSpeed
@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[0].Damage
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[1].Damage
@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[2].Damage
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_moveDamageValues.Array.data[3].Damage
