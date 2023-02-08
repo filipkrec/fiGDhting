@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7919f2ef215c23d4695979cdf273f917, type: 3}
   m_Name: PetraSoundEffects
   m_EditorClassIdentifier: 
+  AttackSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 8300000, guid: 50ebb67617137f9418794a51c0ab795e, type: 3}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: c389b366eee4cd746951de35b51d4a0b, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 8300000, guid: 218b809a51bbfad47aaea5f977fe9641, type: 3}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: 40342b5c55699c04da60b2b3642667a7, type: 3}

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackSoundEffects:
   - Move: 1
-    AudioClip: {fileID: 0}
+    AudioClip: {fileID: 8300000, guid: 2d0d34a7d375d6c408a3432c71831e93, type: 3}
   - Move: 2
     AudioClip: {fileID: 8300000, guid: 04998765d70eeb24c96c19cafccce0c5, type: 3}
   - Move: 4
-    AudioClip: {fileID: 0}
+    AudioClip: {fileID: 8300000, guid: 2aebd687be12c6f4a9c1cbe80941dfeb, type: 3}
   - Move: 5
     AudioClip: {fileID: 8300000, guid: 046bd57c98a800a49b01d385c6b5efa5, type: 3}

@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7919f2ef215c23d4695979cdf273f917, type: 3}
   m_Name: KarlaSoundEffects
   m_EditorClassIdentifier: 
+  AttackSoundEffects:
+  - Move: 1
+    AudioClip: {fileID: 8300000, guid: 4171303e2ca13ec44b00ba06f05d8b00, type: 3}
+  - Move: 2
+    AudioClip: {fileID: 8300000, guid: b7a0a6bcd141e5f4aabce523a238ccb1, type: 3}
+  - Move: 4
+    AudioClip: {fileID: 8300000, guid: fbffeb78ab666ab42aade28b6aa804b9, type: 3}
+  - Move: 5
+    AudioClip: {fileID: 8300000, guid: c83a616c865d4064191447f70190b673, type: 3}
