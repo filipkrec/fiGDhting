@@ -15,9 +15,11 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private Transform m_buttonContainer;
     [SerializeField] private Button m_playButton;
+    [SerializeField] private Button m_onlineButton;
     [SerializeField] private Button m_exitButton;
 
     [SerializeField] private GameObject m_vsPopup;
+    [SerializeField] private OnlineScreen m_onlineScreen;
     [SerializeField] private CharacterSelectionController m_charSelectionScreen;
     [SerializeField] private StageSelection m_stageSelectionScreen;
 
@@ -35,34 +37,16 @@ public class MainMenuController : MonoBehaviour
 
         m_playButton.onClick.AddListener(Play);
         m_exitButton.onClick.AddListener(Exit);
+        m_onlineButton.onClick.AddListener(() => m_onlineScreen.gameObject.SetActive(true));
 
         m_currentMenu = Menu.MainMenu;
 
         m_playButton.interactable = false;
+        m_onlineButton.interactable = false;
 
         foreach (Button btn in m_buttonContainer.GetComponentsInChildren<Button>())
         {
             m_buttons.Add(btn);
-        }
-
-        if (Players.s_Players.Count != 0)
-        {
-            for (int i = 0; i < Players.s_Players.Count; ++i)
-            {
-                Players.s_Players[i].gameObject.SetActive(true);
-                Players.s_Players[i].Init(this, Players.s_Players[i].PlayerIndex);
-            }
-
-            PlayerInput p1input = Players.s_Players.Find((x) => x.PlayerIndex == 0).GetComponent<PlayerInput>();
-            PlayerInput p2input = Players.s_Players.Find((x) => x.PlayerIndex == 1).GetComponent<PlayerInput>();
-
-            p1input.SwitchCurrentControlScheme(FightSetup.PlayerOne.Device);
-            p2input.SwitchCurrentControlScheme(FightSetup.PlayerTwo.Device);
-            m_p1InputText.text = $"P1 :\n " + p1input.devices[0].displayName;
-            m_p2InputText.text = $"P2 :\n " + p2input.devices[0].displayName;
-
-            m_playButton.interactable = true;
-            SelectButton(true);
         }
     }
 
@@ -89,7 +73,12 @@ public class MainMenuController : MonoBehaviour
 
         if (Players.s_Players.Count == 2)
         {
+            m_onlineButton.interactable = false;
             m_playButton.interactable = true;
+        }
+        else if (Players.s_Players.Count == 1)
+        {
+            m_onlineButton.interactable = true;
         }
     }
 
@@ -121,7 +110,7 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
-    private void Play()
+    public void Play()
     {
         if (m_currentMenu != Menu.MainMenu) return;
 

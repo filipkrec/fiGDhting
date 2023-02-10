@@ -1,9 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class MenuPlayer : MonoBehaviour
 {
+    public NetworkPlayer NetworkPlayer = null;
+
     MainMenuController m_controller;
     private int m_playerIndex;
 
@@ -22,8 +23,12 @@ public class MenuPlayer : MonoBehaviour
 
     public void OnSelect(CallbackContext _context)
     {
-        if (m_controller == null || _context.started != true) return;
+        if (NetworkPlayer != null)
+        {
+            NetworkPlayer.StartInput(_context);
+        }
 
+        if (m_controller == null || _context.started != true) return;
         m_controller.OnSelect(m_playerIndex);
     }
 
