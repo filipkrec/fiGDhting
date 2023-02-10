@@ -42,20 +42,8 @@ public class FightSceneManager : MonoBehaviour
         PlayerOne.transform.position = p1Spawn;
         PlayerOne.FaceRight(true);
 
-        PlayerOne.Setup(m_leftHPBar, this);
-        PlayerTwo.Setup(m_rightHPBar, this);
-
-        PlayerInput playerInput = PlayerOne.GetComponent<PlayerInput>();
-        if (FightSetup.PlayerOne.Device != null)
-        {
-            playerInput.SwitchCurrentControlScheme(FightSetup.PlayerOne.Device);
-        }
-
-        playerInput = PlayerTwo.GetComponent<PlayerInput>();
-        if (FightSetup.PlayerTwo.Device != null)
-        {
-            playerInput.SwitchCurrentControlScheme(FightSetup.PlayerTwo.Device);
-        }
+        PlayerOne.Setup(m_leftHPBar, this, 0);
+        PlayerTwo.Setup(m_rightHPBar, this, 1);
     }
 
     public void CheckRotations()

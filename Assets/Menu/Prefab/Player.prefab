@@ -59,18 +59,42 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: P1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bd53c532-8953-4309-b985-ed6c8f4f4e99
     m_ActionName: Base/P1[/Keyboard/numpad4]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: P2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 085df3c1-7b55-4038-b623-de603f376e3f
     m_ActionName: Base/P2[/Keyboard/numpad8]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -2446491086735549089}
-        m_TargetAssemblyTypeName: MenuPlayer, Assembly-CSharp
-        m_MethodName: OnSelect
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: K1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -85,8 +109,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -2446491086735549089}
-        m_TargetAssemblyTypeName: MenuPlayer, Assembly-CSharp
-        m_MethodName: OnBack
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: K2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -101,8 +125,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -2446491086735549089}
-        m_TargetAssemblyTypeName: MenuPlayer, Assembly-CSharp
-        m_MethodName: OnWSAD
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: Join
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -112,16 +136,88 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: a40e7b0f-bb3c-4499-b376-2dc8264ac192
-    m_ActionName: Base/WSAD[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: d002bdd6-d06a-4cef-b1f1-c83fc2486455
     m_ActionName: Base/Join[/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: J
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 79eb1da3-6c1b-4bd2-9514-38e2c9c8395b
     m_ActionName: Base/J[/Keyboard/upArrow,/XInputControllerWindows/dpad/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: W
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 29808325-7892-483f-ae61-4c1ca6221e27
+    m_ActionName: Base/W[/Keyboard/w,/XInputControllerWindows/dpad/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: S
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fcd01772-5037-4994-8383-f4d4e928c700
+    m_ActionName: Base/S[/Keyboard/s,/XInputControllerWindows/dpad/down]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: A
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a9a90316-dabe-41a7-8e84-ef40f505cfb6
+    m_ActionName: Base/A[/Keyboard/a,/XInputControllerWindows/dpad/left]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2446491086735549089}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: D
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 50e7c35f-d5e4-4dab-a578-117f00b02acb
+    m_ActionName: Base/D[/Keyboard/d,/XInputControllerWindows/dpad/right]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Base
@@ -139,3 +235,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d200b8e26e3306047aaf8e8492462494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_playerInput: {fileID: 2133999675396468585}
+  NetworkPlayer: {fileID: 0}

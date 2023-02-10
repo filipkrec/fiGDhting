@@ -25,7 +25,6 @@ public class MainMenuController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI m_p1InputText;
     [SerializeField] private TextMeshProUGUI m_p2InputText;
-    [SerializeField] private Menu m_currentMenu;
 
     private int m_selectedButtonIndex = 0;
     private string m_defaultInputText;
@@ -39,8 +38,6 @@ public class MainMenuController : MonoBehaviour
         m_exitButton.onClick.AddListener(Exit);
         m_onlineButton.onClick.AddListener(() => m_onlineScreen.gameObject.SetActive(true));
 
-        m_currentMenu = Menu.MainMenu;
-
         m_playButton.interactable = false;
         m_onlineButton.interactable = false;
 
@@ -50,9 +47,37 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (PlayerControllerStatic.IsDown(0, Controls.K1))
+        {
+            OnSelect();
+        }
+
+        if (PlayerControllerStatic.IsDown(0, Controls.K2))
+        {
+            OnBack(0);
+        }
+
+        if (PlayerControllerStatic.IsDown(1, Controls.K2))
+        {
+            OnBack(1);
+        }
+
+        if (PlayerControllerStatic.IsDown(0, Controls.W))
+        {
+            SelectButton(false);
+        }
+
+        if (PlayerControllerStatic.IsDown(0, Controls.S))
+        {
+            SelectButton(true);
+        }
+    }
+
     public void OnPlayerJoined(PlayerInput _playerInput)
     {
-        if (Players.s_Players.Contains(_playerInput.GetComponent<MenuPlayer>())) return;
+        if (Players.s_Players.Contains(_playerInput.GetComponent<InputPlayer>())) return;
 
         if (_playerInput.playerIndex == 0)
         {
@@ -66,8 +91,7 @@ public class MainMenuController : MonoBehaviour
             FightSetup.PlayerTwo.Device = _playerInput.devices[0];
         }
 
-        MenuPlayer player = _playerInput.GetComponent<MenuPlayer>();
-        player.Init(this, _playerInput.playerIndex);
+        InputPlayer player = _playerInput.GetComponent<InputPlayer>();
 
         Players.s_Players.Add(player);
 
@@ -112,120 +136,48 @@ public class MainMenuController : MonoBehaviour
 
     public void Play()
     {
-        if (m_currentMenu != Menu.MainMenu) return;
-
-        m_currentMenu = Menu.CharacterSelection;
-        m_vsPopup.SetActive(true); //Plays the animation with event to switch CharSelection to active
+        m_vsPopup.SetActive(true); //Plays the animation with event to switch to CharSelection
     }
 
     private void Exit()
     {
-        if (m_currentMenu != Menu.MainMenu) return;
-
         Application.Quit();
     }
 
-    public void OnSelect(int _playerIndex)
+    public void OnSelect()
     {
-        if (m_currentMenu == Menu.MainMenu)
-        {
-            if (!CheckPrimaryPlayer(_playerIndex)) return;
-            m_buttons[m_selectedButtonIndex].onClick?.Invoke();
-        }
-        else if (m_currentMenu == Menu.CharacterSelection)
-        {
-            if(m_charSelectionScreen.OnSelect(_playerIndex))
-            {
-                m_currentMenu = Menu.StageSelection;
-            }
-        }
-        else if (m_currentMenu == Menu.StageSelection)
-        {
-            m_stageSelectionScreen.OnSelect(_playerIndex);
-        }
+        m_buttons[m_selectedButtonIndex].onClick?.Invoke();
     }
 
     public void OnWSAD(int _playerIndex, Vector2 _value)
     {
-        if (m_currentMenu == Menu.MainMenu)
+        if (_playerIndex != 0) return;
+        if (_value.y < 0)
         {
-            if (_playerIndex != 0) return;
-            if (_value.y < 0)
-            {
-                SelectButton(true);
-            }
-            else if (_value.y > 0)
-            {
-                SelectButton(false);
-            }
+            SelectButton(true);
         }
-        else if (m_currentMenu == Menu.CharacterSelection)
+        else if (_value.y > 0)
         {
-            m_charSelectionScreen.OnWSAD(_playerIndex, _value);
-        }
-        else if (m_currentMenu == Menu.StageSelection)
-        {
-            m_stageSelectionScreen.OnWSAD(_playerIndex, _value);
+            SelectButton(false);
         }
     }
 
     public void OnBack(int _playerIndex)
     {
-        if (m_currentMenu == Menu.MainMenu)
+        InputPlayer player = Players.s_Players.Find((x) => x.PlayerIndex == _playerIndex);
+        Players.s_Players.Remove(player);
+
+        Destroy(player.gameObject);
+
+        m_playButton.interactable = false;
+
+        if (_playerIndex == 0)
         {
-            MenuPlayer player = Players.s_Players.Find((x) => x.PlayerIndex == _playerIndex);
-            Players.s_Players.Remove(player);
-
-            Destroy(player.gameObject);
-
-            m_playButton.interactable = false;
-
-            if (_playerIndex == 0)
-            {
-                m_p1InputText.text = m_defaultInputText;
-            }
-            else if (_playerIndex == 1)
-            {
-                m_p2InputText.text = m_defaultInputText;
-            }
+            m_p1InputText.text = m_defaultInputText;
         }
-        else if (m_currentMenu == Menu.CharacterSelection)
+        else if (_playerIndex == 1)
         {
-            if (m_charSelectionScreen.gameObject.activeInHierarchy)
-            {
-                bool goBack = m_charSelectionScreen.OnBack(_playerIndex);
-
-                if (goBack)
-                {
-                    m_selectedButtonIndex = -1;
-                    SelectButton(true);
-                    m_charSelectionScreen.gameObject.SetActive(false);
-                    m_currentMenu = Menu.MainMenu;
-                }
-            }
+            m_p2InputText.text = m_defaultInputText;
         }
-        else if (m_currentMenu == Menu.StageSelection)
-        {
-            if (m_stageSelectionScreen.gameObject.activeInHierarchy)
-            {
-                bool goBack = m_stageSelectionScreen.OnBack(_playerIndex);
-
-                if (goBack)
-                {
-                    m_stageSelectionScreen.gameObject.SetActive(false);
-                    m_charSelectionScreen.gameObject.SetActive(true);
-                    m_currentMenu = Menu.CharacterSelection;
-                }
-            }
-        }
-    }
-
-    private bool CheckPrimaryPlayer(int _playerIndex)
-    {
-        if (Players.s_Players.Count == 2)
-        {
-            return _playerIndex == 0;
-        }
-        else return true;
     }
 }

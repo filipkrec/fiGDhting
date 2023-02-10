@@ -7,6 +7,8 @@ public class CharacterSelectionController : MonoBehaviour
     public const int FIELD_WIDTH = 4;
 
     [SerializeField] private CharactersScriptable m_scriptable;
+    [SerializeField] private MainMenuController m_mainMenuController;
+
     [SerializeField] private PlayerPick m_playerOnePick;
     [SerializeField] private PlayerPick m_playerTwoPick;
 
@@ -28,8 +30,33 @@ public class CharacterSelectionController : MonoBehaviour
 
         m_rowCount = Mathf.FloorToInt((float)m_characterSelections.Count / 4) + 1;
 
-        Pick(Random.Range(0, m_characterSelections.Count), 0);
-        Pick(Random.Range(0, m_characterSelections.Count), 1);
+        Pick(0, 0);
+        Pick(0, 1);
+    }
+
+    private void Update()
+    {
+        if (PlayerControllerStatic.IsDown(0, Controls.W)) OnWSAD(0, Directions.Up);
+        if (PlayerControllerStatic.IsDown(0, Controls.S)) OnWSAD(0, Directions.Down);
+        if (PlayerControllerStatic.IsDown(0, Controls.A)) OnWSAD(0, Directions.Left);
+        if (PlayerControllerStatic.IsDown(0, Controls.D)) OnWSAD(0, Directions.Right);
+
+        if (PlayerControllerStatic.IsDown(1, Controls.W)) OnWSAD(1, Directions.Up);
+        if (PlayerControllerStatic.IsDown(1, Controls.S)) OnWSAD(1, Directions.Down);
+        if (PlayerControllerStatic.IsDown(1, Controls.A)) OnWSAD(1, Directions.Left);
+        if (PlayerControllerStatic.IsDown(1, Controls.D)) OnWSAD(1, Directions.Right);
+
+        if (PlayerControllerStatic.IsDown(0, Controls.K1)) OnSelect(0);
+        if (PlayerControllerStatic.IsDown(1, Controls.K1)) OnSelect(1);
+
+        if (PlayerControllerStatic.IsDown(0, Controls.K2))
+        { 
+            if(OnBack(0)) SwitchToMainMenu(); 
+        }
+        if (PlayerControllerStatic.IsDown(1, Controls.K2))
+        {
+            OnBack(1);
+        }
     }
 
     private void Pick(int _characterIndex, int _playerIndex)
@@ -84,18 +111,16 @@ public class CharacterSelectionController : MonoBehaviour
         }
     }
 
-    public bool OnSelect(int _playerIndex)
+    public void OnSelect(int _playerIndex)
     {
         if (m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
         {
             gameObject.SetActive(false);
             m_stageSelection.gameObject.SetActive(true);
-            return true;
         }
         else
         {
             LockPick(_playerIndex);
-            return false;
         }
     }
 
@@ -112,7 +137,13 @@ public class CharacterSelectionController : MonoBehaviour
         return _playerIndex == 0;
     }
 
-    public void OnWSAD(int _playerIndex, Vector2 _value)
+    public void SwitchToMainMenu()
+    {
+        gameObject.SetActive(false);
+        m_mainMenuController.gameObject.SetActive(true);
+    }
+
+    public void OnWSAD(int _playerIndex, Directions _direction)
     {
         PlayerPick pick = _playerIndex == 0 ? m_playerOnePick : m_playerTwoPick;
 
@@ -123,21 +154,20 @@ public class CharacterSelectionController : MonoBehaviour
         int row = Mathf.FloorToInt((float)selectedIndex / FIELD_WIDTH);
         int column = selectedIndex - (row * FIELD_WIDTH);
 
-        if (_value.x > 0)
+        switch(_direction)
         {
-            column++;
-        }
-        else if (_value.x < 0)
-        {
-            column--;
-        }
-        else if (_value.y > 0)
-        {
-            row--;
-        }
-        else if (_value.y < 0)
-        {
-            row++;
+            case (Directions.Right):
+                column++;
+                break;
+            case (Directions.Left):
+                column--;
+                break;
+            case (Directions.Down):
+                row++;
+                break;
+            case (Directions.Up):
+                row--;
+                break;
         }
 
         column = Mathf.Clamp(column, 0, FIELD_WIDTH - 1);

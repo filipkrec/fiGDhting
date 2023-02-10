@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
-    public bool IsHost = NetworkServer.active && NetworkClient.active;
-    public bool ClientConnected = NetworkClient.active;
+    public static bool IsHost = NetworkServer.active && NetworkClient.active;
+    public static bool ClientConnected = NetworkClient.active;
 
     private static int m_playerCount = 0;
 

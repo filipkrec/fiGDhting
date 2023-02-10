@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StageSelection : MonoBehaviour
 {
     [SerializeField] private CharactersScriptable m_charScriptable;
+    [SerializeField] private CharacterSelectionController m_characterSelectionContr;
     [SerializeField] private StagesScriptable m_scriptable;
 
     [SerializeField] private Selection m_prefab;
@@ -31,8 +32,33 @@ public class StageSelection : MonoBehaviour
 
         m_rowCount = Mathf.FloorToInt((float)m_characterSelections.Count / 4) + 1;
 
-        Pick(Random.Range(0, m_characterSelections.Count), 0);
-        Pick(Random.Range(0, m_characterSelections.Count), 1);
+        Pick(0, 0);
+        Pick(0, 1);
+    }
+
+    private void Update()
+    {
+        if (PlayerControllerStatic.IsDown(0, Controls.W)) OnWSAD(0, Directions.Up);
+        if (PlayerControllerStatic.IsDown(0, Controls.S)) OnWSAD(0, Directions.Down);
+        if (PlayerControllerStatic.IsDown(0, Controls.A)) OnWSAD(0, Directions.Left);
+        if (PlayerControllerStatic.IsDown(0, Controls.D)) OnWSAD(0, Directions.Right);
+
+        if (PlayerControllerStatic.IsDown(1, Controls.W)) OnWSAD(1, Directions.Up);
+        if (PlayerControllerStatic.IsDown(1, Controls.S)) OnWSAD(1, Directions.Down);
+        if (PlayerControllerStatic.IsDown(1, Controls.A)) OnWSAD(1, Directions.Left);
+        if (PlayerControllerStatic.IsDown(1, Controls.D)) OnWSAD(1, Directions.Right);
+
+        if (PlayerControllerStatic.IsDown(0, Controls.K1)) OnSelect(0);
+        if (PlayerControllerStatic.IsDown(1, Controls.K1)) OnSelect(1);
+
+        if (PlayerControllerStatic.IsDown(0, Controls.K2))
+        {
+            if (OnBack(0)) SwitchToCharacterSelection();
+        }
+        if (PlayerControllerStatic.IsDown(1, Controls.K2))
+        {
+            OnBack(1);
+        }
     }
 
     private void Pick(int _characterIndex, int _playerIndex)
@@ -96,10 +122,6 @@ public class StageSelection : MonoBehaviour
     {
         if (m_playerOnePick.IsLocked && m_playerTwoPick.IsLocked)
         {
-            foreach (MenuPlayer player in Players.s_Players)
-            {
-                player.gameObject.SetActive(false);
-            }
             StartCoroutine(StartGameCoroutine());
         }
         else
@@ -121,7 +143,13 @@ public class StageSelection : MonoBehaviour
         return _playerIndex == 0;
     }
 
-    public void OnWSAD(int _playerIndex, Vector2 _value)
+    private void SwitchToCharacterSelection()
+    {
+        gameObject.SetActive(false);
+        m_characterSelectionContr.gameObject.SetActive(true);
+    }
+
+    public void OnWSAD(int _playerIndex, Directions _direction)
     {
         if ((m_playerOnePick.IsLocked && _playerIndex == 0) || (m_playerTwoPick.IsLocked && _playerIndex == 1)) return;
 
@@ -130,21 +158,20 @@ public class StageSelection : MonoBehaviour
         int row = Mathf.FloorToInt((float)selectedIndex / CharacterSelectionController.FIELD_WIDTH);
         int column = selectedIndex - (row * CharacterSelectionController.FIELD_WIDTH);
 
-        if (_value.x > 0)
+        switch (_direction)
         {
-            column++;
-        }
-        else if (_value.x < 0)
-        {
-            column--;
-        }
-        else if (_value.y > 0)
-        {
-            row--;
-        }
-        else if (_value.y < 0)
-        {
-            row++;
+            case (Directions.Right):
+                column++;
+                break;
+            case (Directions.Left):
+                column--;
+                break;
+            case (Directions.Down):
+                row++;
+                break;
+            case (Directions.Up):
+                row--;
+                break;
         }
 
         column = Mathf.Clamp(column, 0, CharacterSelectionController.FIELD_WIDTH - 1);
@@ -160,7 +187,7 @@ public class StageSelection : MonoBehaviour
 
     private void Lock(int _playerIndex, bool _true)
     {
-        if(_playerIndex == 0)
+        if (_playerIndex == 0)
         {
             m_playerOnePick.Lock(_true, true);
         }
@@ -185,7 +212,7 @@ public class StageSelection : MonoBehaviour
             float time = Random.Range(1f, 3f);
             float step = 0.1f;
 
-            while(time > 0)
+            while (time > 0)
             {
 
                 selected = SwapSelected(selected);
@@ -194,7 +221,7 @@ public class StageSelection : MonoBehaviour
             }
 
             time = 2f;
-            while(time > 0f)
+            while (time > 0f)
             {
                 selected = SwapSelected(selected);
                 float progressiveStep = Mathf.Lerp(2.1f - time, 2f, 0.5f);
@@ -206,9 +233,9 @@ public class StageSelection : MonoBehaviour
         selected = SwapSelected(selected);
         yield return new WaitForSeconds(2f);
 
-        FightSetup.SelectedStage = selected == 
-            0 
-            ? m_scriptable.stages[m_playerOnePick.SelectedCharIndex] 
+        FightSetup.SelectedStage = selected ==
+            0
+            ? m_scriptable.stages[m_playerOnePick.SelectedCharIndex]
             : m_scriptable.stages[m_playerTwoPick.SelectedCharIndex];
 
         SceneManager.LoadScene(1);
@@ -218,7 +245,7 @@ public class StageSelection : MonoBehaviour
     {
         int selected = current == 0 ? 1 : 0;
 
-        if(selected == 0)
+        if (selected == 0)
         {
             m_selectedStage.sprite = m_playerOnePick.m_image.sprite;
         }

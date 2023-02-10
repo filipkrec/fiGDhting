@@ -62,4 +62,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3675ca0bdb44cdc4fa253cd4245a1e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.016666668
   m_playerId: 125
+  m_isLocal: 0
+  P1: 0
+  P2: 0
+  K1: 0
+  K2: 0
+  W: 0
+  S: 0
+  A: 0
+  D: 0
+  Join: 0
+  J: 0

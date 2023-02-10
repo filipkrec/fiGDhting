@@ -103,6 +103,7 @@ public class CharacterBase : MonoBehaviour
     public string Name => m_name;
     public Sprite Icon => m_icon;
 
+    private int m_playerId;
     public bool Paused;
 
     public PlayerAudioManager PlayerAudioManager;
@@ -113,7 +114,7 @@ public class CharacterBase : MonoBehaviour
     public void K1(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k1) DoAction(Moveset.k1); }
     public void K2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k2) DoAction(Moveset.k2); }
 
-    public void Setup(HealthBar _hpBar, FightSceneManager _manager)
+    public void Setup(HealthBar _hpBar, FightSceneManager _manager, int _playerId = 0)
     {
         m_manager = _manager;
 
@@ -135,6 +136,8 @@ public class CharacterBase : MonoBehaviour
         m_healthBar = _hpBar;
         m_healthBar.SetName(this);
         m_healthBar.SetHP(1f);
+
+        m_playerId = _playerId;
     }
 
     public void FaceRight(bool _true)
@@ -145,17 +148,70 @@ public class CharacterBase : MonoBehaviour
 
     private void Update()
     {
-        if (m_moveValue.x > 0)
+        ProcessMoves();
+    }
+
+    private void ProcessMoves()
+    {
+        if(PlayerControllerStatic.IsDown(m_playerId, Controls.Join))
+        {
+            m_manager.MenuPause();
+        }
+
+        if (Pause.Paused)
+        {
+            if (PlayerControllerStatic.IsDown(m_playerId, Controls.W))
+            {
+                m_manager.MenuUp();
+            }
+            else if (PlayerControllerStatic.IsDown(m_playerId, Controls.S))
+            {
+                m_manager.MenuDown();
+            }
+
+            return;
+        }
+
+        if (m_stunned) return;
+
+        if (PlayerControllerStatic.IsPressed(m_playerId, Controls.D))
         {
             Move(true);
         }
-        else if (m_moveValue.x < 0)
+        else if (PlayerControllerStatic.IsPressed(m_playerId, Controls.A))
         {
             Move(false);
         }
-        else if (m_moveValue.y < 0)
+
+        if (PlayerControllerStatic.IsPressed(m_playerId, Controls.S))
         {
             Block(true);
+        }
+        else if (m_currentMove == Moveset.b)
+        {
+            Block(false);
+        }
+
+        if (PlayerControllerStatic.IsDown(m_playerId, Controls.P1))
+        {
+            DoAction(Moveset.p1);
+        }
+        if (PlayerControllerStatic.IsDown(m_playerId, Controls.P2))
+        {
+            DoAction(Moveset.p2);
+        }
+        if (PlayerControllerStatic.IsDown(m_playerId, Controls.K1))
+        {
+            DoAction(Moveset.k1);
+        }
+        if (PlayerControllerStatic.IsDown(m_playerId, Controls.K2))
+        {
+            DoAction(Moveset.k2);
+        }
+
+        if (PlayerControllerStatic.IsDown(m_playerId, Controls.W))
+        {
+            DoAction(Moveset.j);
         }
     }
 
@@ -166,45 +222,6 @@ public class CharacterBase : MonoBehaviour
         if (m_currentMove == Moveset.b) return;
 
         m_currentMove = Moveset.i;
-    }
-
-    public void OnWSAD(CallbackContext _context)
-    {
-        if (Pause.Paused)
-        {
-            float direction = _context.ReadValue<Vector2>().y;
-            if (direction > 0)
-            {
-                m_manager.MenuUp();
-            }
-            else if (direction < 0)
-            {
-                m_manager.MenuDown();
-            }
-
-            return;
-        }
-
-        if (m_stunned) return;
-
-        m_moveValue = _context.ReadValue<Vector2>();
-
-        if (m_moveValue.y < 0)
-        {
-            Block(true);
-        }
-        else if (m_moveValue.y >= 0 || m_moveValue.x != 0)
-        {
-            Block(false);
-        }
-    }
-
-    public void StartPause(CallbackContext _context)
-    {
-        if (_context.started == true)
-        {
-            m_manager.MenuPause();
-        }
     }
 
     private void DoAction(Moveset _action)
