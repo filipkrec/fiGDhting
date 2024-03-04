@@ -12,4 +12,6 @@ public class CharacterSoundEffectSO : ScriptableObject
         new AttackSoundEffect(Moveset.k1,null),
         new AttackSoundEffect(Moveset.k2,null),
     };
+
+    public AudioClip ThemeSongClip;
 }

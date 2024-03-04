@@ -21,3 +21,4 @@ MonoBehaviour:
     AudioClip: {fileID: 8300000, guid: 2aebd687be12c6f4a9c1cbe80941dfeb, type: 3}
   - Move: 5
     AudioClip: {fileID: 8300000, guid: 046bd57c98a800a49b01d385c6b5efa5, type: 3}
+  ThemeSongClip: {fileID: 8300000, guid: f2a118d24810eb140a4e9c858139aaba, type: 3}
