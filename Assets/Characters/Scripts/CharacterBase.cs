@@ -15,6 +15,7 @@ public enum Moveset
     j,
     k1,
     k2,
+    bankai,
     b,
     l,
     r
@@ -35,18 +36,7 @@ public class CharacterBase : MonoBehaviour
     private const float BREAK_STUN_TIME = 2f;
     private const float STUN_MULTIPLYER = 1.5f;
     private const float DISPLACE_MULTIPLYER = 0.03f;
-
-    private static Dictionary<Moveset, KeyCode> moveKeys = new()
-    {
-        { Moveset.p1, KeyCode.Keypad4 },
-        { Moveset.p2, KeyCode.Keypad8 },
-        { Moveset.k1, KeyCode.Keypad6 },
-        { Moveset.k2, KeyCode.Keypad2 },
-        { Moveset.j, KeyCode.UpArrow },
-        { Moveset.b, KeyCode.DownArrow },
-        { Moveset.l, KeyCode.LeftArrow },
-        { Moveset.r, KeyCode.RightArrow },
-    };
+    private const int BANKAI_FULL = 100;
 
     private static Dictionary<Moveset, string> moveTriggers = new()
     {
@@ -55,16 +45,6 @@ public class CharacterBase : MonoBehaviour
         { Moveset.j, "j" },
         { Moveset.k1, "k1" },
         { Moveset.k2, "k2" },
-    };
-
-    private static HashSet<Moveset> hardHits = new HashSet<Moveset>()
-    {
-        Moveset.k2, Moveset.p2
-    };
-
-    private static HashSet<Moveset> fastHits = new HashSet<Moveset>()
-    {
-        Moveset.k1, Moveset.p1, Moveset.j
     };
 
     [SerializeField] private string m_name;
@@ -77,6 +57,8 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private ColliderEvent m_hitbox;
     [SerializeField] private Rigidbody2D m_rigidbody;
     [SerializeField] private GameObject m_effect;
+    [SerializeField] private GameObject m_shield;
+    [SerializeField] private GameObject m_stun;
 
     [Header("Stats")]
 
@@ -89,9 +71,8 @@ public class CharacterBase : MonoBehaviour
 
     private Vector2 m_moveValue;
 
-    private float m_baseHeight;
-    private Vector3 m_basePosition;
     private int m_health;
+    [SerializeField] private int m_bankai;
     private bool m_stunned;
     private bool m_lastChance;
     private bool m_facingRight;
@@ -112,13 +93,12 @@ public class CharacterBase : MonoBehaviour
     public void P2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.p2) DoAction(Moveset.p2); }
     public void K1(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k1) DoAction(Moveset.k1); }
     public void K2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k2) DoAction(Moveset.k2); }
+    public void Bankai(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.bankai) DoAction(Moveset.bankai); }
 
     public void Setup(HealthBar _hpBar, FightSceneManager _manager)
     {
         m_manager = _manager;
 
-        m_baseHeight = transform.position.y;
-        m_basePosition = m_rigidbody.transform.localPosition;
         m_currentMove = Moveset.i;
 
         spriteRenderer.material = new Material(spriteRenderer.material);
@@ -219,6 +199,15 @@ public class CharacterBase : MonoBehaviour
 
         if (m_stunned || m_currentMove != Moveset.i) return;
 
+        if (_action == Moveset.bankai)
+        {
+            if (m_bankai == BANKAI_FULL)
+            {
+                DoBankai();
+            }
+            return;
+        }
+
         if(m_moveDamageValues.Exists((x) => x.Move == _action && x.Unbreakable))
         {
             m_unbreakable = true;
@@ -227,6 +216,11 @@ public class CharacterBase : MonoBehaviour
         m_currentMove = _action;
 
         m_animator.SetTrigger(moveTriggers[_action]);
+    }
+
+    private void DoBankai()
+    {
+        m_bankai = 0;
     }
 
     private void Move(bool _directionRight)
@@ -245,15 +239,21 @@ public class CharacterBase : MonoBehaviour
 
         if (_isBlocking)
         {
-            spriteRenderer.material.color = Color.gray;
+            m_shield.SetActive(true);
             InteruptAction();
             m_currentMove = Moveset.b;
         }
         else
         {
             m_currentMove = Moveset.i;
-            spriteRenderer.material.color = Color.white;
+            m_shield.SetActive(false);
         }
+    }
+    
+    private void SetStunned(bool _isStunned)
+    {
+        m_stun.SetActive(_isStunned);
+        m_stunned = _isStunned;
     }
 
     public void TakeDamage(int _damage)
@@ -261,7 +261,7 @@ public class CharacterBase : MonoBehaviour
         if (m_stunned)
         {
             _damage = (int)(_damage * STUN_MULTIPLYER);
-            m_stunned = false;
+            SetStunned(false);
         }
 
         m_health -= _damage;
@@ -366,16 +366,14 @@ public class CharacterBase : MonoBehaviour
     private IEnumerator TakeDmgCoroutine()
     {
         spriteRenderer.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.15f);
         spriteRenderer.material.color = Color.white;
     }
 
     private IEnumerator StunCoroutine(float time)
     {
-        m_stunned = true;
-        spriteRenderer.material.color = Color.yellow;
+        SetStunned(true);
         yield return new WaitForSeconds(time);
-        spriteRenderer.material.color = Color.white;
-        m_stunned = false;
+        SetStunned(false);
     }
 }

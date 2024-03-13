@@ -17,6 +17,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image m_icon;
     [SerializeField] private Image m_specialImage;
     [SerializeField] private TextMeshProUGUI m_name;
+    [SerializeField] private Image m_bankaiBar;
 
     private float m_timeToCatchUp;
 
@@ -43,6 +44,12 @@ public class HealthBar : MonoBehaviour
         float fill = (m_topFill - m_bottomFill) * _percentage + m_bottomFill;
         StartCoroutine(SetBarCoroutine(m_frontBar, fill));
         StartCoroutine(CatchUpBackBarCoroutine());
+    }
+
+    public void SetBankai(float _percentage)
+    {
+        _percentage = Mathf.Clamp(_percentage, 0f, 1f);
+        m_bankaiBar.fillAmount = _percentage;
     }
 
     public void SetSpecial(bool _isOn = true)

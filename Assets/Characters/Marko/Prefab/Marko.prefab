@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 733360523605550160, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
@@ -19,6 +20,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 5143f8b09e1a22c46a77f128f60cfb62, type: 2}
+    - target: {fileID: 1152289263838805619, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1152289263838805619, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1276491021587214863, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -110,6 +119,26 @@ PrefabInstance:
     - target: {fileID: 3027457645035623947, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: Collider
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085974341228158974, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Color.a
+      value: 0.44705883
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085974341228158974, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Color.b
+      value: 0.427451
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085974341228158974, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_Color.r
+      value: 0.72156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027847266217880359, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5396377375168482114, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5932667586941094348, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
       propertyPath: m_Size.x
@@ -228,4 +257,7 @@ PrefabInstance:
       value: -0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
