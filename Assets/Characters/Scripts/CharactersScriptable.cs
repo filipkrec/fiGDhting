@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,5 +9,14 @@ public class CharactersScriptable : ScriptableObject
     public Color PlayerTwoColor;
     public Color MixedColor;
 
-    public List<CharacterBase> Characters;
+    public List<CharacterInfo> Characters;
+}
+
+[Serializable]
+public struct CharacterInfo
+{
+    public CharacterBase Character;
+    public Color Color;
+    public Sprite BankaiImage;
+    public AudioClip BankaiClip;
 }

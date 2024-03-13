@@ -36,7 +36,7 @@ public class CharacterBase : MonoBehaviour
     private const float BREAK_STUN_TIME = 2f;
     private const float STUN_MULTIPLYER = 1.5f;
     private const float DISPLACE_MULTIPLYER = 0.03f;
-    private const int BANKAI_FULL = 100;
+    private const int BANKAI_FULL = 3000;
 
     private static Dictionary<Moveset, string> moveTriggers = new()
     {
@@ -93,7 +93,7 @@ public class CharacterBase : MonoBehaviour
     public void P2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.p2) DoAction(Moveset.p2); }
     public void K1(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k1) DoAction(Moveset.k1); }
     public void K2(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.k2) DoAction(Moveset.k2); }
-    public void Bankai(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.bankai) DoAction(Moveset.bankai); }
+    public void Bnki(CallbackContext _context) { if (_context.started && m_currentMove != Moveset.bankai) DoAction(Moveset.bankai); }
 
     public void Setup(HealthBar _hpBar, FightSceneManager _manager)
     {
@@ -115,6 +115,8 @@ public class CharacterBase : MonoBehaviour
         m_healthBar = _hpBar;
         m_healthBar.SetName(this);
         m_healthBar.SetHP(1f);
+
+        UpdateBankaiBar(0);
     }
 
     public void FaceRight(bool _true)
@@ -218,9 +220,18 @@ public class CharacterBase : MonoBehaviour
         m_animator.SetTrigger(moveTriggers[_action]);
     }
 
+    private void UpdateBankaiBar(int value)
+    {
+        m_bankai = Mathf.Clamp(value,0,BANKAI_FULL);
+        m_healthBar.SetBankai((float)value / BANKAI_FULL);
+    }
+
     private void DoBankai()
     {
-        m_bankai = 0;
+        if (Bankai.s_Instance.TryDoBankai(this))
+        {
+            UpdateBankaiBar(0);
+        }
     }
 
     private void Move(bool _directionRight)
@@ -231,6 +242,11 @@ public class CharacterBase : MonoBehaviour
 
         m_manager.CheckRotations();
         m_manager.CheckBorders(transform);
+
+        if (_directionRight && FacingRight || !_directionRight && !FacingRight)
+        {
+            UpdateBankaiBar(m_bankai + 1);
+        }
     }
 
     private void Block(bool _isBlocking)

@@ -1,7 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image m_specialImage;
     [SerializeField] private TextMeshProUGUI m_name;
     [SerializeField] private Image m_bankaiBar;
+    [SerializeField] private Image m_bankaiFlash;
 
     private float m_timeToCatchUp;
 
@@ -31,7 +32,7 @@ public class HealthBar : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             test -= 0.1f;
             SetHP(test);
@@ -50,6 +51,8 @@ public class HealthBar : MonoBehaviour
     {
         _percentage = Mathf.Clamp(_percentage, 0f, 1f);
         m_bankaiBar.fillAmount = _percentage;
+
+        m_bankaiFlash.gameObject.SetActive(_percentage >= 1f);
     }
 
     public void SetSpecial(bool _isOn = true)
@@ -73,13 +76,13 @@ public class HealthBar : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator CatchUpBackBarCoroutine() 
+    public IEnumerator CatchUpBackBarCoroutine()
     {
         if (m_timeToCatchUp <= 0f)
         {
             m_timeToCatchUp = m_catchUpTime;
 
-            while(m_timeToCatchUp > 0f)
+            while (m_timeToCatchUp > 0f)
             {
                 m_timeToCatchUp -= Time.deltaTime;
                 yield return null;

@@ -19,10 +19,10 @@ public class CharacterSelectionController : MonoBehaviour
 
     private void Start()
     {
-        foreach (CharacterBase character in m_scriptable.Characters)
+        foreach (CharacterInfo character in m_scriptable.Characters)
         {
             Selection characterSelection = Instantiate(m_prefab, m_picksField.transform);
-            characterSelection.Icon.sprite = character.Icon;
+            characterSelection.Icon.sprite = character.Character.Icon;
             m_characterSelections.Add(characterSelection);
         }
 

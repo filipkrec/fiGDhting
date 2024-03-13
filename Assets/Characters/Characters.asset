@@ -16,10 +16,31 @@ MonoBehaviour:
   PlayerTwoColor: {r: 1, g: 0.06132078, b: 0.06132078, a: 1}
   MixedColor: {r: 1, g: 0, b: 0.9315591, a: 1}
   Characters:
-  - {fileID: 6932790911635042385, guid: e534030513392124e866592bca470cfc, type: 3}
-  - {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
-  - {fileID: 2162871770648686177, guid: 30564694cc7023841885e16256630bac, type: 3}
-  - {fileID: 3738877830614123234, guid: 52de297ca962f384490e7c8d7c42502b, type: 3}
-  - {fileID: 1953889722603708067, guid: b091635ed830e4440b9047c3e1846cb9, type: 3}
-  - {fileID: 8363338839085808311, guid: 3b3ef15f6534135429fc7fa894a3d277, type: 3}
-  - {fileID: 3280031518941740326, guid: e5e15465f87960a40be33d3fed5dc9b9, type: 3}
+  - Character: {fileID: 6932790911635042385, guid: e534030513392124e866592bca470cfc, type: 3}
+    Color: {r: 0, g: 0, b: 0, a: 0}
+    BankaiImage: {fileID: 0}
+    BankaiClip: {fileID: 0}
+  - Character: {fileID: 6932790911635042385, guid: 8af7a5c120d48c1408b73c023e7856b0, type: 3}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    BankaiImage: {fileID: 21300000, guid: 602805fe3b79c9543ba7242f4e664e86, type: 3}
+    BankaiClip: {fileID: 8300000, guid: 0c00c68d2b6f1d04eab702ec32b7142b, type: 3}
+  - Character: {fileID: 2162871770648686177, guid: 30564694cc7023841885e16256630bac, type: 3}
+    Color: {r: 0.6117647, g: 0.8117647, b: 0.96862745, a: 1}
+    BankaiImage: {fileID: 21300000, guid: 8093d114cf98c1b4d922c565fdcb8ab0, type: 3}
+    BankaiClip: {fileID: 8300000, guid: 6396dcf1997978944aae0e13e2f6e125, type: 3}
+  - Character: {fileID: 3738877830614123234, guid: 52de297ca962f384490e7c8d7c42502b, type: 3}
+    Color: {r: 0.72156864, g: 1, b: 0.42745098, a: 1}
+    BankaiImage: {fileID: 21300000, guid: 7ecc183cd69248348ab2e419cf67beb4, type: 3}
+    BankaiClip: {fileID: 8300000, guid: 940e4cf9aaf41314f824cea5588ce912, type: 3}
+  - Character: {fileID: 1953889722603708067, guid: b091635ed830e4440b9047c3e1846cb9, type: 3}
+    Color: {r: 1, g: 0.6, b: 0.8, a: 1}
+    BankaiImage: {fileID: 21300000, guid: 2f3f9de4a780cef42bbfef6dd9c21e87, type: 3}
+    BankaiClip: {fileID: 8300000, guid: d0c9e7376ab310b408c6dd6bf13bcc51, type: 3}
+  - Character: {fileID: 3280031518941740326, guid: e5e15465f87960a40be33d3fed5dc9b9, type: 3}
+    Color: {r: 0.56078434, g: 1, b: 0.9372549, a: 1}
+    BankaiImage: {fileID: 21300000, guid: a029a8e91de32f04b8c8bc8e16c7a18a, type: 3}
+    BankaiClip: {fileID: 8300000, guid: 33797a065a5227c44979f4b0ca03a4a4, type: 3}
+  - Character: {fileID: 8363338839085808311, guid: 3b3ef15f6534135429fc7fa894a3d277, type: 3}
+    Color: {r: 0.3882353, g: 0.1764706, b: 0.19607843, a: 1}
+    BankaiImage: {fileID: 21300000, guid: 4c563845c5309c94582cca9243866112, type: 3}
+    BankaiClip: {fileID: 8300000, guid: 1c1bcd8bb37e66944bd0ba4eb7943d96, type: 3}

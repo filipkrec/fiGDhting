@@ -20,7 +20,7 @@ public class PlayerPick : MonoBehaviour
 
     public void Set(int _index)
     {
-        CharacterBase character = m_scriptable.Characters[_index];
+        CharacterBase character = m_scriptable.Characters[_index].Character;
 
         m_image.sprite = character.Icon;
         m_border.color = m_player == 0 ? m_scriptable.PlayerOneColor : m_scriptable.PlayerTwoColor;
@@ -48,11 +48,11 @@ public class PlayerPick : MonoBehaviour
 
         if (m_player == 0)
         {
-            FightSetup.PlayerOne.Character = m_scriptable.Characters[m_selectedCharIndex];
+            FightSetup.PlayerOne.Character = m_scriptable.Characters[m_selectedCharIndex].Character;
         }
         else
         {
-            FightSetup.PlayerTwo.Character = m_scriptable.Characters[m_selectedCharIndex];
+            FightSetup.PlayerTwo.Character = m_scriptable.Characters[m_selectedCharIndex].Character;
         }
     }
 }
