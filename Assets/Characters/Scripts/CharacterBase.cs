@@ -36,7 +36,9 @@ public class CharacterBase : MonoBehaviour
     private const float BREAK_STUN_TIME = 2f;
     private const float STUN_MULTIPLYER = 1.5f;
     private const float DISPLACE_MULTIPLYER = 0.03f;
-    private const int BANKAI_FULL = 3000;
+    private const int BANKAI_FULL = 10;
+    private const float BANKAI_PER_SECOND = 1f;
+    private const int BLOCK_DIVISOR = 5;
 
     private static Dictionary<Moveset, string> moveTriggers = new()
     {
@@ -55,6 +57,7 @@ public class CharacterBase : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator m_animator;
     [SerializeField] private ColliderEvent m_hitbox;
+    [SerializeField] private GameObject m_hurtbox;
     [SerializeField] private Rigidbody2D m_rigidbody;
     [SerializeField] private GameObject m_effect;
     [SerializeField] private GameObject m_shield;
@@ -72,7 +75,7 @@ public class CharacterBase : MonoBehaviour
     private Vector2 m_moveValue;
 
     private int m_health;
-    [SerializeField] private int m_bankai;
+    private float m_bankai;
     private bool m_stunned;
     private bool m_lastChance;
     private bool m_facingRight;
@@ -81,6 +84,8 @@ public class CharacterBase : MonoBehaviour
     private Moveset m_currentMove;
 
     public bool FacingRight => m_facingRight;
+    public bool IsBlocking => m_currentMove == Moveset.b;
+    public GameObject HurtBox => m_hurtbox;
     public string Name => m_name;
     public Sprite Icon => m_icon;
 
@@ -220,10 +225,10 @@ public class CharacterBase : MonoBehaviour
         m_animator.SetTrigger(moveTriggers[_action]);
     }
 
-    private void UpdateBankaiBar(int value)
+    private void UpdateBankaiBar(float value)
     {
         m_bankai = Mathf.Clamp(value,0,BANKAI_FULL);
-        m_healthBar.SetBankai((float)value / BANKAI_FULL);
+        m_healthBar.SetBankai(value / BANKAI_FULL);
     }
 
     private void DoBankai()
@@ -245,7 +250,7 @@ public class CharacterBase : MonoBehaviour
 
         if (_directionRight && FacingRight || !_directionRight && !FacingRight)
         {
-            UpdateBankaiBar(m_bankai + 1);
+            UpdateBankaiBar(m_bankai + 1f * Time.deltaTime);
         }
     }
 
@@ -278,6 +283,11 @@ public class CharacterBase : MonoBehaviour
         {
             _damage = (int)(_damage * STUN_MULTIPLYER);
             SetStunned(false);
+        }
+
+        if(IsBlocking)
+        {
+            _damage = _damage / BLOCK_DIVISOR;
         }
 
         m_health -= _damage;
@@ -330,6 +340,7 @@ public class CharacterBase : MonoBehaviour
     private void Stun(float _time)
     {
         m_moveValue = Vector2.zero;
+        if (IsBlocking) Block(false);
         InteruptAction();
         StartCoroutine(StunCoroutine(_time));
     }
@@ -350,7 +361,7 @@ public class CharacterBase : MonoBehaviour
             hitMultiple = currMove.HitsMultiple;
         }
 
-        if (enemy.m_currentMove == Moveset.b)
+        if (enemy.IsBlocking)
         {
             if(m_currentMove == Moveset.j)
             {
@@ -358,7 +369,7 @@ public class CharacterBase : MonoBehaviour
             }
             else
             {
-                enemy.TakeDamage(currentDamage / 5);
+                enemy.TakeDamage(currentDamage);
                 Stun(STUN_TIME * (float)currentDamage / 10 * (hitMultiple ? 2 : 1));                
             }
 

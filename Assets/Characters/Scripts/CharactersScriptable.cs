@@ -19,4 +19,5 @@ public struct CharacterInfo
     public Color Color;
     public Sprite BankaiImage;
     public AudioClip BankaiClip;
+    public BankaiObject Bankai;
 }

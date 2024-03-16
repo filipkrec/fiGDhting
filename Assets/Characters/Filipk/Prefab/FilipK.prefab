@@ -51,6 +51,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 917445785128656011}
   m_animator: {fileID: 1127136147194153020}
   m_hitbox: {fileID: 3371525295180926202}
+  m_hurtbox: {fileID: 7539861299743147094}
   m_rigidbody: {fileID: 7648880477497499642}
   m_effect: {fileID: 6055895137707210030}
   m_shield: {fileID: 5027847266217880359}

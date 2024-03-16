@@ -7,6 +7,8 @@ using System.Linq;
 
 public class Bankai : MonoBehaviour
 {
+    const int DEFAULT_BANKAI_DMG = 50;
+
     public static Bankai s_Instance => s_instance;
 
     private static Bankai s_instance;
@@ -20,6 +22,7 @@ public class Bankai : MonoBehaviour
     private bool m_bankaing;
     private CharacterBase m_currentCaster;
     private CharacterBase m_currentTarget;
+    private CharacterInfo m_casterInfo;
 
     void Start()
     {
@@ -47,10 +50,10 @@ public class Bankai : MonoBehaviour
             }
         }
 
-        CharacterInfo info = m_charactersScriptable.Characters.FirstOrDefault((x) => x.Character.Name == _characterBase.Name);
-        m_bankaiImage.sprite = info.BankaiImage;
-        m_bankaiText.color = info.Color;
-        m_bankaiAudioSource.clip = info.BankaiClip;
+        m_casterInfo = m_charactersScriptable.Characters.FirstOrDefault((x) => x.Character.Name == _characterBase.Name);
+        m_bankaiImage.sprite = m_casterInfo.BankaiImage;
+        m_bankaiText.color = m_casterInfo.Color;
+        m_bankaiAudioSource.clip = m_casterInfo.BankaiClip;
         m_bankaiAudioSource.Play();
 
         m_bankaiUI.SetActive(true);
@@ -60,8 +63,15 @@ public class Bankai : MonoBehaviour
     
     public void DoBankai()
     {
+        if(m_casterInfo.Bankai != null)
+        {
+            m_casterInfo.Bankai.Bankai(m_currentCaster, m_currentTarget);
+        }
+        else
+        {
+            m_currentTarget.TakeDamage(DEFAULT_BANKAI_DMG);
+        }
         m_bankaiUI.SetActive(false);
-        m_currentTarget.TakeDamage(50);
         m_bankaing = false;
     }
 }
